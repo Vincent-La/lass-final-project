@@ -22,8 +22,6 @@ mv audiosep_16k,baseline,step%3D200000.ckpt audiosep_baseline.ckpt
 
 Download Dcase Validation Dataset
 ```
-wget https://zenodo.org/records/10886481/files/lass_synthetic_validation.csv && \
-wget https://zenodo.org/records/10886481/files/lass_validation.json && \
 wget https://zenodo.org/records/10886481/files/lass_validation.zip && \
 unzip lass_validation.zip
 ```
