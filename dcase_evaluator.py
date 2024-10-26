@@ -14,7 +14,9 @@ import librosa
 import lightning.pytorch as pl
 from models.clap_encoder import CLAP_Encoder
 
-sys.path.append('../dcase2024_task9_baseline/')
+# sys.path.append('../dcase2024_task9_baseline/')
+sys.path.append('../lass-final-project')
+
 from utils import (
     load_ss_model,
     calculate_sdr,
@@ -152,5 +154,6 @@ if __name__ == '__main__':
         audio_dir='lass_validation',
     )
 
-    checkpoint_path='audiosep_16k,baseline,step=200000.ckpt'
+    # checkpoint_path='audiosep_16k,baseline,step=200000.ckpt'
+    checkpoint_path='checkpoint/audiosep_baseline.ckpt'
     eval(dcase_evaluator, checkpoint_path, device = "cuda")
