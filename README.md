@@ -3,6 +3,14 @@
 + Original [README](dcase_README.md)
 
 
+## Setup One-Peace Submodule
+```
+cd ONE-PEACE && \
+git submodule init && \
+git submodule update
+```
+
+
 ## LASS Environment Setup
 ```
 conda env create -f environment.yml && \
