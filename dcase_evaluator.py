@@ -67,6 +67,8 @@ class DCASEEvaluator:
             for eval_data in tqdm(self.eval_list):
 
                 source, noise, snr, caption = eval_data
+
+                # TODO: source-noise-ratio ?
                 snr = int(snr)
 
                 source_path = os.path.join(self.audio_dir, f'{source}.wav')
@@ -92,6 +94,7 @@ class DCASEEvaluator:
 
                 sdr_no_sep = calculate_sdr(ref=source, est=mixture)
 
+                # TODO: modfiy ONE-PEACE to use a similar function here
                 conditions = pl_model.query_encoder.get_query_embed(
                     modality='text',
                     text=[caption],

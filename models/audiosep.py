@@ -87,6 +87,10 @@ class AudioSep(pl.LightningModule, PyTorchModelHubMixin):
                 use_text_ratio=self.use_text_ratio,
             )
 
+        # TODO: modify for encoder type ONE-PEACE
+        # NOTE: CLAP using hybrid modality? sometimes it gets the embedding for the mixed audio ?
+        # if self.query_encoder_type == 'ONE-PEACE'
+
         input_dict = {
             'mixture': mixtures[:, None, :].squeeze(1),
             'condition': conditions,

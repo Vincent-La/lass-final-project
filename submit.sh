@@ -19,7 +19,8 @@ module load cuda
 
 source ~/.bashrc
 # eval "$(micromamba shell hook --shell bash)"
-micromamba activate AudioSep
+# micromamba activate AudioSep
+micromamba activate LASS
 
 python dcase_evaluator.py
 

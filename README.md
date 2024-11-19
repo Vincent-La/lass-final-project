@@ -2,12 +2,22 @@
 
 + Original [README](dcase_README.md)
 
+
+## LASS Environment Setup
+```
+conda env create -f environment.yml && \
+conda activate LASS
+```
+
+Then, try to run [`test.ipynb`](test.ipynb)
+
+
 ## Baseline Model Evaluation Setup
 
 
-Environment Setup
+Environment Setup (**can skip this and use LASS environment**)
 ```
-conda env create -f environment.yml && \
+conda env create -f audiosep_environment.yml && \
 conda activate AudioSep
 ```
 
