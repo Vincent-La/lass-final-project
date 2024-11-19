@@ -1,0 +1,3 @@
+[submodule "ONE-PEACE"]
+	path = ONE-PEACE
+	url = git@github.com:OFA-Sys/ONE-PEACE.git
