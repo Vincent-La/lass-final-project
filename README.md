@@ -14,10 +14,6 @@ git submodule update
 
 ## LASS Environment Setup
 
-Set this environment variable because pip doesn't support relative file paths...
-```
-REPO_DIRECTORY=`git rev-parse --show-toplevel` && export REPO_DIRECTORY
-```
 
 Create envirnonment with conda/mamba
 ```

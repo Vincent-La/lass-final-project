@@ -13,7 +13,7 @@ decorator==5.1.1
 einops==0.6.1
 exceptiongroup==1.2.2
 executing==2.1.0
-fairseq @ file:${REPO_DIRECTORY}/ONE-PEACE/fairseq
+file:./ONE-PEACE/fairseq
 filelock==3.16.1
 fsspec==2024.10.0
 huggingface-hub==0.26.2
