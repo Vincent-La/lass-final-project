@@ -18,12 +18,15 @@ class ONE_PEACE_Encoder(nn.Module):
 
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model = from_pretrained(pretrained_path, device=self.device, dtype="float32")
-
-
+        self.encoder_type = 'ONE-PEACE'
 
     def _get_audio_embed(self, batch):
         pass
 
+
+    '''
+        batch: List[str]
+    '''
     def _get_text_embed(self, batch):
 
         # TODO: look into this double_batch thing 
@@ -32,9 +35,8 @@ class ONE_PEACE_Encoder(nn.Module):
         #     batch = batch * 2
         #     double_batch = True
         with torch.no_grad():
-            # the 'fusion' truncate mode can be changed to 'rand_trunc' if run in unfusion mode
-            text_data = self.tokenizer(batch)
-            embed = self.model.get_text_embedding(text_data)
+            src_tokens = self.model.process_text(batch)
+            embed = self.model.extract_text_features(src_tokens)
         # if double_batch:
         #     embed = embed[0].unsqueeze(0)
         

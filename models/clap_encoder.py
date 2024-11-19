@@ -76,6 +76,11 @@ class CLAP_Encoder(nn.Module):
                 return embed.detach()
 
     def _get_text_embed(self, batch):
+
+        # print(batch)
+        # import sys
+        # sys.exit(-1)
+
         double_batch = False
         if len(batch) == 1:
             batch = batch * 2

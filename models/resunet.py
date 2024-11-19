@@ -8,6 +8,8 @@ from models.base import Base, init_layer, init_bn, act
 
 
 class FiLM(nn.Module):
+
+    # TODO: need to init with condition_size == 1536 (dim size of One-Peace embedding)
     def __init__(self, film_meta, condition_size):
         super(FiLM, self).__init__()
 
@@ -532,6 +534,7 @@ class ResUNet30_Base(nn.Module, Base):
 
         mag, cos_in, sin_in = self.wav_to_spectrogram_phase(mixtures)
         x = mag
+
 
         # Batch normalization
         x = x.transpose(1, 3)
