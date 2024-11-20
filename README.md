@@ -21,6 +21,11 @@ conda env create -f environment.yml && \
 conda activate LASS
 ```
 
+(Optional) If using mamba/micromamba you can run this to get Jupyter to detect the kernel for your LASS environment
+```
+python -m ipykernel install --user --name LASS
+```
+
 Then, try to run [`test.ipynb`](test.ipynb)
 
 
