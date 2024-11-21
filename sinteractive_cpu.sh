@@ -1,8 +1,7 @@
 #!/bin/bash
 salloc --partition=class \
        --qos=high \
-       --account=class   \
-       --gres=gpu:rtxa5000:1 \
+       --account=class \
        --nodes=1 \
        --ntasks=1 \
        --ntasks-per-node=1 \

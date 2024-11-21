@@ -18,7 +18,7 @@ dependencies:
 - openssl=1.1.1w=hd590300_0
 - pip=24.0=pyhd8ed1ab_0
 - pip:
-  - -r one_peace_requirements.txt
+  - -r lass_requirements.txt
 - python=3.9.0=hffdb5ce_5_cpython
 - readline=8.2=h8228510_1
 - setuptools=75.5.0=pyhff2d567_0
