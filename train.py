@@ -223,7 +223,10 @@ def train(args) -> NoReturn:
     if query_net == 'CLAP':
         query_encoder = CLAP_Encoder()
     elif query_net == 'ONE-PEACE':
-        query_encoder = ONE_PEACE_Encoder()
+        # deal with some weird relative paths
+        os.chdir('ONE-PEACE')
+        query_encoder = ONE_PEACE_Encoder(pretrained_path=args.one_peace_checkpoint_path)
+        os.chdir('..')
     else:
         raise NotImplementedError
 
@@ -299,9 +302,17 @@ if __name__ == "__main__":
     parser.add_argument(
         "--resume_checkpoint_path",
         type=str,
-        required=True,
+        required=False,
         default='',
         help="Path of pretrained checkpoint for finetuning.",
+    )
+
+    parser.add_argument(
+        '--one_peace_checkpoint_path',
+        type=str,
+        required=False,
+        help='Path of pretrained checkpoint for One-Peace query encoder'
+
     )
 
     args = parser.parse_args()

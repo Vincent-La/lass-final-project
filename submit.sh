@@ -8,7 +8,7 @@
 #SBATCH --partition=class
 #SBATCH --qos=high                                 # set QOS, this will determine what resources can be requested
 #SBATCH --account=class
-#SBATCH --gres=gpu:rtxa5000:1
+#SBATCH --gres=gpu:rtxa5000:4
 
 #SBATCH --nodes=1                                               # number of nodes to allocate for your job
 #SBATCH --ntasks=1                                              
