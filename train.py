@@ -266,7 +266,7 @@ def train(args) -> NoReturn:
         logger=None,
         callbacks=callbacks,
         fast_dev_run=False,
-        max_epochs=-1,
+        max_epochs=20,          # NOTE: 20 epochs at 10,000 steps/epoch = 200,000 steps which is the amount of training baseline is given
         log_every_n_steps=50,
         use_distributed_sampler=True,
         sync_batchnorm=sync_batchnorm,
