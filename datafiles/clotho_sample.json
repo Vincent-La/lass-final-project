@@ -1,0 +1,404 @@
+{
+    "data": [
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Distorted AM Radio noise.wav",
+            "caption": "The loud buzz of static constantly changes pitch and volume."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Paper_Parchment_Rustling.wav",
+            "caption": "A person is turning a map over and over."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/03 Whales Slowing Down.wav",
+            "caption": "Several barnyard animals mooing in a barn while it rains outside."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Rope tied to boat in port.wav",
+            "caption": "An office chair is squeaking as someone bends back and forth in it."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/carpenter bee.wav",
+            "caption": "Outdoors, insect trapped in a spider web and then breaks loose and flies away."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/violin1.wav",
+            "caption": "A bow playing a stringed instrument in a one note tone repeatedly before violins join to create the melody."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/121006_rain&amp;storm.wav",
+            "caption": "As thunder claps far in the distance, the rain pours down."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/draaiorgel2.wav",
+            "caption": "Something goes round that is playing its song."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Officejet Printer.wav",
+            "caption": "A small printing device performing duties and printing pages of text."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Stockholm subway C20 train departing.wav",
+            "caption": "A horn beeps for an amusement park ride, air brakes release and the ride takes off."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/metalTunnel.wav",
+            "caption": "A very robotic synth modulates and reverberates within itself"
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Ambience Night crickets.wav",
+            "caption": "A serene bit of nightfall is met by crickets chirping"
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Maria Hernandez Park September 1st.wav",
+            "caption": "A skateboarder is coasting on his board on a back and forth ramp as voices talk in the background."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Traffic Light.wav",
+            "caption": "A detector device is operating and detecting nothing and then it registers some activity."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/jettish.wav",
+            "caption": "fancy alarm or alert system that is constantly going off"
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/broken comms2.wav",
+            "caption": "The computer is beeping as a voice recording drags ."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/wind3.wav",
+            "caption": "Wind howls violently and shrilly then begins to taper off."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Drinking Through Straw.wav",
+            "caption": "A straw is moving and audible as it whirls around the bottom of the drain."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/the swarm v31m3.wav",
+            "caption": "A built up sound comprised of whirring, chirping and other sounds that slowly dies off."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Giant 1.wav",
+            "caption": "A person gurgling, while trying to ape speech patterns, with some soft, occasional metal clanking in the background."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/dull metal.wav",
+            "caption": "Metal prongs rapping insistently against the concrete ground."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Small Chain Clanging.wav",
+            "caption": "A person crunches through dried leaves on the ground."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Hitting Tall Grass.wav",
+            "caption": "A person slowly clears high growth vegetation outdoors"
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Thunder Storm Daytona 3.wav",
+            "caption": "Water is running and a roar of thunder happens at the same time."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/smoking in car.wav",
+            "caption": "Striking the lighter, she lit the cigarette, pulled and began to cough."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Huston we have a problem (before &amp; after cleaning).wav",
+            "caption": "Dispatcher and radio communication between people who are talking."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Subping03.wav",
+            "caption": "A bell sound rings and echoes and slowly returns."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/sheep on pasture.wav",
+            "caption": "Sheep call out while birds chirp in the background."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/je_footstepsCement.wav",
+            "caption": "Someone walking down a sidewalk and dragging their feet a little bit."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Geroezemoes.wav",
+            "caption": "A great number of people of all sorts of ages converse with each other, including a small child."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/paper01.wav",
+            "caption": "Someone flipping the large leaf pages of a book."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/0400 Traffic_police.wav",
+            "caption": "A car idling then somebody blowing a whistle while motorcycles pass by"
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Crowd ambience, eating popcorn.wav",
+            "caption": "people are talking loudly in the background indistinguishably"
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Walking in a park, on gravel (wind) - Athens National Botanical Garden.wav",
+            "caption": "Someone walking down a sidewalk next to a school with kids on the playground playing."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Fan_Ventilation_Stereo 4.wav",
+            "caption": "A large industrial machine was whirring inside of a room."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Cicadas and birds in a hot summer noon.wav",
+            "caption": "In a jungle, a flock of birds chirp among the flowing river."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/150209 Trevor Webb Beard Trimming.wav",
+            "caption": "The buzzing of an electric razor, as someone receives a hair cut."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/16_Rain_Light_Ocean_44_16.wav",
+            "caption": "A camp fire crackles as the flames burn branches and leaves."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/160718 HSN boy on tricycle passing by.wav",
+            "caption": "A shredder is on and a person puts a charge card into the shredder."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/remix of 130879__frederic-font__05-hang-song-1.wav",
+            "caption": "Someone playing an instrument at a constant rate and tune."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/2 Gardener - May 2013 - Take01 - ZOOM H2n.wav",
+            "caption": "A weed whacker trimming edges from a lawn."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/fridaynight.wav",
+            "caption": "Traffic roars, a distant siren sounds, and a street performer plays music."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/ClockTicking.wav",
+            "caption": "A pendulum moves back and forth and a pendulum ticks."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Running.wav",
+            "caption": "Slow first, then quickening, horse feet and the jangle of their harness pass along, followed by a light cough."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/opening and closing a loft door.wav",
+            "caption": "Someone slowly slides open a heavy screen door and then proceeds to walk down the hallway."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Breaking Glass .wav",
+            "caption": "the sound of glass breaking and falling onto the floor"
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/arsta.wav",
+            "caption": "Storm wind blows in the dense forest and makes a peaceful sound."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Dog splashing in a lake.wav",
+            "caption": "Jumping into the water to swim, the dog came out panting and shook his body."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/20100402.Brugge.street.04.wav",
+            "caption": "A group is in a carriage that is being drawn by a horse on a paved road."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/DOOR_sliding_fthrll.wav",
+            "caption": "A loud foot stomp interrupts the rhythmic use of the old adding machine."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/20110220_river.wav",
+            "caption": "It is easy to sleep when a lot of rain from a storm hits the top of a country roof."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/20130723_Rain1.wav",
+            "caption": "A vehicle comes to a stop and idles with clunking sound before multiple honks and yells interfere."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/SFX_001.wav",
+            "caption": "Unknown musical tones coming from some kind of electric musical instrument."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/steel water.wav",
+            "caption": "Different type of vessels are beaten with a stick to give different noise effects."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/A swing is squeaking at night. (Ukraine.wav",
+            "caption": "A person plays the wind instrument making sharp shrill sounds terrible to listen to."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Lively Forest Stream (loop).wav",
+            "caption": "A river flows and water trickles down the rocks."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Bangles put on arm.wav",
+            "caption": "A crystal and metal big lamp is being hung."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/AMB_Supermarket_BCN.wav",
+            "caption": "At a grocery store, a cashier is scanning items."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Pig - Multiple Snorts 6 (2 pigs) - 96kHz.wav",
+            "caption": "Hogs oinking in an enclosure with faint noises of people talking in the background."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Anti Air Gun (3 Sounds).wav",
+            "caption": "A single gun being to shoot repeatedly and is shortly followed by a second and third gun."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/City Ambience w_ Car Passing_1-2.wav",
+            "caption": "A truck drives down a road before fading into the distance."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Goin wee wee.wav",
+            "caption": "Water slowly drips before moving into large splashes before a giant flush."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Car_Driveby_Ford Fiesta_Puddles-Mud-Gravel.wav",
+            "caption": "A car rides down a gravel driveway, gains speed and exits onto the street."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Baby crying slowed down.wav",
+            "caption": "A person is struggling in distress and making noises gasping for air."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/driving_buying_beer_on_sunday.wav",
+            "caption": "A guy is speaking with the screaming of a person in the background"
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/pc_mouse.wav",
+            "caption": "Someone cracks their knuckles after strumming their fingers on a desk."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/metro underground ambient noisy transport catalan barcelona minimal tickling glitch.wav",
+            "caption": "A public transport alerts its passengers and states something."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/hugeSlidingDoorSlamECM800.wav",
+            "caption": "tapping the door sound followed by an idle sound and door open and close sound."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Boa Constrictor.wav",
+            "caption": "A flame from a welding iron is turned on and off."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/bohinj_forestFootsteps.wav",
+            "caption": "Footsteps approach, then go away, as birds chirp in the area."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Uh, Hi, Mom. I Crashed the Car.wav",
+            "caption": "A person speaks but mumbles over their words nervously."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Busy Coffee Shop.wav",
+            "caption": "A coffee machine operates as people converse in the background."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Water Pour and Drink.wav",
+            "caption": "Water is poured into a container and then gulped by someone who pants and continues to chug."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/outdoors ambient windy wind leaves rustle.wav",
+            "caption": "Steaks are cooked on a grill and flipped to the other side to cook."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/vacuum power head.wav",
+            "caption": "A blow dryer running a little loudly and having its ups and downs."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Buddhist Bells.wav",
+            "caption": "A person plays a triangle and it vibrates the sound."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Packaging Paper Pen Scribble.wav",
+            "caption": "Someone rubs and a tapping sound is audible in the foreground."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/kitchen-door.wav",
+            "caption": "A door is opened and it squeaks as a person ambulates."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/cd_load_26sedit.wav",
+            "caption": "A radio tuner being moved across static and various weak stations emitting Morse code."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/dishwasher beep and motor.wav",
+            "caption": "A machine started moving until the worker stopped and adjusted the machine, then continued working."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/dryer_long_1.wav",
+            "caption": "An audible blow dryer which steams and begins to vent."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Sugar Packet.wav",
+            "caption": "A container of pills are shaken back and forth harshly then at a steady beat then fast and harsh."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Heavy Rain 1.wav",
+            "caption": "Moderate to heavy rainfall with slight thunder in the background."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Steps Indoor medium soft Shoe Sole accompanying wooden Floor hollow Big Room 5mx10mx6m.wav",
+            "caption": "Many footsteps in a hallway and then a slight pause"
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/CivicSI.Accelerating.1.wav",
+            "caption": "A race car taking off from a garage at the racetrack."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Windshield Wiper.wav",
+            "caption": "Water is moved with a squeegee and floor is swept."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Pasta bag shuffling.wav",
+            "caption": "Someone grabs a bag of potato chips and folds the bag"
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Oie 01.wav",
+            "caption": "The goose honked loudly and the other geese cawed a response."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/cooking onions.wav",
+            "caption": "Someone is frying food in a metal skillet, using a metal turner."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/trainsounds.wav",
+            "caption": "An old train is going down the tracks, making strange noises."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Creaking and squeaking of old headsets.wav",
+            "caption": "A person performing a delicate engineering task including operation of a winding mechanism."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Rain_inside_of_a_Car.wav",
+            "caption": "rain loud failing on a can getting loud and louder."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Crows chattering.wav",
+            "caption": "squirrels talking and fighting over bird feed with traffic in the background."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/picht-type-writer.wav",
+            "caption": "A person moves through the page using a manual typewriter, and a bell rings each time the line is reset."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Noise Monster 7.wav",
+            "caption": "The loud beast snarls and roars at various times."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/klotsend ad veerpont ii.wav",
+            "caption": "Water bubbles escape from objects being dunked in water"
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/landschap3.wav",
+            "caption": "Birds chirp lightly against a calming sea breeze."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Summer Ambiance .wav",
+            "caption": "A strong wind blows as birds tweet in the foreground."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/lakeside birds 2.wav",
+            "caption": "Birds continually chirp lightly, then a bird creates a loud siren like chirp."
+        },
+        {
+            "wav": "/fs/nexus-scratch/vla/Clotho/development/Shopping Mall, ambience.wav",
+            "caption": "As everyone laughed and talked dishes and silverware were pinging."
+        }
+    ]
+}
