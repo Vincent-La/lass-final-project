@@ -13,6 +13,7 @@ from losses import get_loss_function
 from models.audiosep import AudioSep, get_model_class
 from data.waveform_mixers import SegmentMixer
 from models.clap_encoder import CLAP_Encoder
+from models.one_peace_encoder import ONE_PEACE_Encoder
 from callbacks.base import CheckpointEveryNSteps
 from optimizers.lr_schedulers import get_lr_lambda
 
@@ -221,6 +222,8 @@ def train(args) -> NoReturn:
     
     if query_net == 'CLAP':
         query_encoder = CLAP_Encoder()
+    elif query_net == 'ONE-PEACE':
+        query_encoder = ONE_PEACE_Encoder()
     else:
         raise NotImplementedError
 
