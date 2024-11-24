@@ -3,7 +3,7 @@
 #SBATCH --job-name=audiosep_onepeace_train                     # sets the job name
 #SBATCH --output=audiosep_onepeace_train.%j                    # indicates a file to redirect STDOUT to; %j is the jobid. If set, must be set to a file instead of a directory or else submission will fail.
 #SBATCH --error=audiosep_onepeace_train.%j                     # indicates a file to redirect STDERR to; %j is the jobid. If set, must be set to a file instead of a directory or else submission will fail.
-#SBATCH --time=24:00:00                                      # how long you would like your job to run; format=hh:mm:ss
+#SBATCH --time=48:00:00                                      # how long you would like your job to run; format=hh:mm:ss
 
 #SBATCH --partition=vulcan-scavenger
 #SBATCH --qos=vulcan-scavenger                                # set QOS, this will determine what resources can be requested

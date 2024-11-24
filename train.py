@@ -181,6 +181,8 @@ def train(args) -> NoReturn:
     warm_up_steps = configs['train']["optimizer"]['warm_up_steps']
     reduce_lr_steps = configs['train']["optimizer"]['reduce_lr_steps']
     save_step_frequency = configs['train']['save_step_frequency']
+    max_steps = configs['train']['max_steps']
+
     resume_checkpoint_path = args.resume_checkpoint_path
     if resume_checkpoint_path == "":
         resume_checkpoint_path = None
@@ -266,7 +268,8 @@ def train(args) -> NoReturn:
         logger=None,
         callbacks=callbacks,
         fast_dev_run=False,
-        max_epochs=20,          # NOTE: 20 epochs at 10,000 steps/epoch = 200,000 steps which is the amount of training baseline is given
+        max_steps = max_steps,    # NOTE: added this so we can set max steps in config yaml
+        # max_epochs=20,          # NOTE: 20 epochs at 10,000 steps/epoch = 200,000 steps which is the amount of training baseline is given
         log_every_n_steps=50,
         use_distributed_sampler=True,
         sync_batchnorm=sync_batchnorm,

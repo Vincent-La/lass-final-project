@@ -1,5 +1,4 @@
 from dcase_evaluator import DCASEEvaluator
-from models.clap_encoder import CLAP_Encoder
 from models.audiosep import AudioSep
 from models.one_peace_encoder import ONE_PEACE_Encoder
 

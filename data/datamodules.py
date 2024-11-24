@@ -75,8 +75,8 @@ class DataModule(pl.LightningDataModule):
         # test_split = Dataset(...)
         # return DataLoader(test_split)
         pass
-
-    def teardown(self):
+    
+    def teardown(self, stage: Optional[str] = None):
         # clean up after fit or test
         # called on every process in DDP
         pass

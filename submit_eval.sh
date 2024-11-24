@@ -5,10 +5,18 @@
 #SBATCH --error=audiosep_onepeace_eval.%j                     # indicates a file to redirect STDERR to; %j is the jobid. If set, must be set to a file instead of a directory or else submission will fail.
 #SBATCH --time=01:00:00                                      # how long you would like your job to run; format=hh:mm:ss
 
-#SBATCH --partition=class
-#SBATCH --qos=high                                # set QOS, this will determine what resources can be requested
-#SBATCH --account=class
+
+#SBATCH --partition=vulcan-scavenger
+#SBATCH --qos=vulcan-scavenger                                # set QOS, this will determine what resources can be requested
+#SBATCH --account=vulcan-abhinav
 #SBATCH --gres=gpu:rtxa5000:1
+
+
+#IGNORE SBATCH --partition=class
+#IGNORE SBATCH --qos=high                                # set QOS, this will determine what resources can be requested
+#IGNORE SBATCH --account=class
+#IGNORE SBATCH --gres=gpu:rtxa5000:1
+
 
 #SBATCH --nodes=1                                               # number of nodes to allocate for your job
 #SBATCH --ntasks=1                                             
@@ -21,7 +29,7 @@ micromamba activate LASS
 
 srun python eval.py --config_yaml config/audiosep_onepeace.yaml \
                     --encoder_checkpoint_path /fs/nexus-scratch/vla/finetune_al_retrieval.pt \
-                    --ssnet_checkpoint_path /fs/nexus-scratch/vla/checkpoints/train/audiosep_onepeace,devices=1/step=1.ckpt
+                    --ssnet_checkpoint_path /nfshomes/vla/lass-final-project/checkpoints/train/audiosep_onepeace,devices=1/step=60000.ckpt
 
 
 wait                                                            # wait for any background processes to complete
