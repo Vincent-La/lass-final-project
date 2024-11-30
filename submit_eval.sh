@@ -29,7 +29,7 @@ micromamba activate LASS
 
 srun python eval.py --config_yaml config/audiosep_onepeace.yaml \
                     --encoder_checkpoint_path /fs/nexus-scratch/vla/finetune_al_retrieval.pt \
-                    --ssnet_checkpoint_path /nfshomes/vla/lass-final-project/checkpoints/train/audiosep_onepeace,devices=1/step=60000.ckpt
+                    --ssnet_checkpoint_path /nfshomes/vla/lass-final-project/checkpoints/train/audiosep_onepeace,devices=1/step=160000.ckpt 
 
 
 wait                                                            # wait for any background processes to complete
