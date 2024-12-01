@@ -8,20 +8,21 @@
 #SBATCH --partition=vulcan-scavenger
 #SBATCH --qos=vulcan-scavenger                                # set QOS, this will determine what resources can be requested
 #SBATCH --account=vulcan-abhinav
-#SBATCH --gres=gpu:rtxa6000:1
+#SBATCH --gres=gpu:rtxa6000:2
 
-#SBATCH --nodes=1                                               # number of nodes to allocate for your job
-#SBATCH --ntasks=1                                             
-#SBATCH --ntasks-per-node=1                                     
+#IGNORE SBATCH --nodes=1                                               # number of nodes to allocate for your job
+#IGNORE SBATCH --ntasks=2                                             
+#IGNORE SBATCH --ntasks-per-node=2                                     
 #SBATCH --mem=128gb                                               # (cpu) memory required by job; if unit is not specified MB will be assumed
+#SBATCH --exclusive
 
 module load cuda
 source ~/.bashrc
 micromamba activate LASS
 
-srun python train.py --workspace . \
+srun python train.py --workspace results/onepeace_fsd50k_retrieval_checkpoint \
                      --config_yaml config/audiosep_onepeace.yaml \
-                     --one_peace_checkpoint_path /fs/nexus-scratch/vla/finetune_al_retrieval.pt
+                     --one_peace_checkpoint_path /fs/nexus-scratch/vla/finetune_fsd50k.pt
 
 wait                                                            # wait for any background processes to complete
 
