@@ -12,13 +12,18 @@ class ONE_PEACE_Encoder(nn.Module):
 
     def __init__(
         self,
-        pretrained_path='ONE-PEACE',  
+        pretrained_path='ONE-PEACE', 
+        model_type = 'one_peace_retrieval'
     ):
         
         super().__init__()
 
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.model = from_pretrained(pretrained_path, device=self.device, dtype="float32")
+        self.model = from_pretrained(pretrained_path, 
+                                     model_type=model_type,
+                                     device=self.device, 
+                                     dtype="float32")
+        
         self.encoder_type = 'ONE-PEACE'
 
 

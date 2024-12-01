@@ -1,8 +1,10 @@
 
 /checkpoint
+/**/checkpoints
 /lass_validation
 /lass_evaluation_real
 /lass_evaluation_real_output
+/lightning_logs
 
 # ---- Python .gitignore template ----
 # Byte-compiled / optimized / DLL files
