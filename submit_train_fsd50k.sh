@@ -13,8 +13,7 @@
 #IGNORE SBATCH --nodes=1                                               # number of nodes to allocate for your job
 #IGNORE SBATCH --ntasks=2                                             
 #IGNORE SBATCH --ntasks-per-node=2                                     
-#SBATCH --mem=128gb                                               # (cpu) memory required by job; if unit is not specified MB will be assumed
-#SBATCH --exclusive
+#SBATCH --mem=64gb                                               # (cpu) memory required by job; if unit is not specified MB will be assumed
 
 module load cuda
 source ~/.bashrc
