@@ -125,8 +125,8 @@ steps = [1] + [i for i in range(1, 200001) if i % 20000 == 0]
 
 params = {
     'config_yaml': ['--config_yaml', '', ['config/audiosep_onepeace.yaml']],
-    'encoder_checkpoint_path': ['--encoder_checkpoint_path', '', ['/fs/nexus-scratch/vla/finetune_al_retrieval.pt']],
-    'ssnet-checkpoint_path': ['--ssnet_checkpoint_path', 'checkpoint_path', [f'/nfshomes/vla/lass-final-project/checkpoints/train/audiosep_onepeace,devices=1/step={s}.ckpt' for s in steps]]
+    'encoder_checkpoint_path': ['--encoder_checkpoint_path', '', ['/fs/nexus-scratch/vla/one-peace.pt']],
+    'ssnet-checkpoint_path': ['--ssnet_checkpoint_path', 'checkpoint_path', [f'/nfshomes/vla/lass-final-project/results/onepeace_baseline_checkpoint/checkpoints/train/audiosep_onepeace,devices=1/step={s}.ckpt' for s in steps]]
 }
 
 #######################################################################

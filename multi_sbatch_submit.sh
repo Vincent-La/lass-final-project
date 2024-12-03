@@ -5,7 +5,7 @@ python multi_sbatch.py --env slurm_files \
                        --gpu 1 --gpu-type a5000 a6000 \
                        --cores 1 \
                        --mem 64 \
-                       --output-dirname validation_outputs \
+                       --output-dirname results/onepeace_baseline_checkpoint/validation_outputs \
                     #    --dryrun
                                 
 
