@@ -6,6 +6,7 @@
 /lass_evaluation_real_output
 /lightning_logs
 /lass_validation_output
+/audio_downloads
 
 # ---- Python .gitignore template ----
 # Byte-compiled / optimized / DLL files

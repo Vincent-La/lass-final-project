@@ -1,0 +1,201 @@
+filename,input_similarity,output_similarity,delta_similarity,text_prompt
+test-real-case-0.wav,0.35348094,0.17879736,-0.17468357,"the fire crackles in the wind, creating a rhythmic and soothing sound."
+test-real-case-1.wav,0.40858853,0.17487505,-0.23371348,the fire is making crackling sounds at home.
+test-real-case-2.wav,0.2993897,0.41880995,0.11942026,the wind chimes are making a crisp and sweet sound.
+test-real-case-3.wav,0.306068,0.40564406,0.099576056,the wind chime is ringing continuously.
+test-real-case-4.wav,0.18625778,0.26853073,0.08227295,a group of people are talking with each other.
+test-real-case-5.wav,0.309571,0.29217476,-0.017396241, some people are speaking on the subway.
+test-real-case-6.wav,0.3102299,0.37152404,0.06129414,a cat is meowing amidst the faint sound of bird calls.
+test-real-case-7.wav,0.068629175,0.05218771,-0.016441464,birds are chirping in the distance.
+test-real-case-8.wav,0.23058836,0.08841142,-0.14217694,there are faint chattering sounds in the background.
+test-real-case-9.wav,0.2984128,0.27317178,-0.025241017,"the subway train is moving along the tracks, producing a low rumble."
+test-real-case-10.wav,0.17334706,0.23279393,0.05944687,"in the forest, the birds are chirping incessantly."
+test-real-case-11.wav,0.19526447,0.25069675,0.055432275,a car is passing by a noisy road.
+test-real-case-12.wav,-0.033668455,0.17970671,0.21337517,the woman is speaking in a distance.
+test-real-case-13.wav,0.16351512,0.23595901,0.07244389,the woman is talking with others.
+test-real-case-14.wav,0.23238963,0.13193126,-0.10045837,the raindrops are dribbling down onto the ground.
+test-real-case-15.wav,0.2285192,0.11102815,-0.11749105,"the raindrops are falling to the ground, emitting splattering sounds. "
+test-real-case-16.wav,0.36858886,0.26087967,-0.1077092,the crowd is cheering and giving applause.
+test-real-case-17.wav,0.32807773,0.21747337,-0.11060436,"the crowd is cheering, yelling, whistling, and applauding enthusiastically."
+test-real-case-18.wav,0.21295874,0.31751782,0.10455908,there are bird vocalizations in the wild.
+test-real-case-19.wav,0.31836352,0.31379193,-0.004571587,lots of birds are chirping together in the forest.
+test-real-case-20.wav,0.40346485,0.5059116,0.102446735,thunder is raging and rumbling from afar.
+test-real-case-21.wav,0.11189271,0.048692152,-0.063200556,the rain is falling to the surface.
+test-real-case-22.wav,0.503387,0.38785437,-0.11553261,the crowd is clapping their hands to give congratulations in a big room.
+test-real-case-23.wav,0.516792,0.4045806,-0.112211406,the crowd is clapping their hands to give congratulations.
+test-real-case-24.wav,0.35405982,0.24900354,-0.10505627,people are clapping while talking to each other.
+test-real-case-25.wav,0.3072297,0.1353397,-0.17188999,people are clapping their hands intermittently.
+test-real-case-26.wav,0.29873973,0.13579209,-0.16294764,clear footsteps keep coming from afar.
+test-real-case-27.wav,0.3960929,0.12420412,-0.27188876,a lot of insects are chirping and a dog is barking.
+test-real-case-28.wav,0.4680441,0.38821933,-0.079824775,a cuckoo is singing happily in the forest.
+test-real-case-29.wav,0.48725656,0.3587994,-0.12845716,a cuckoo is singing loudly in the forest.
+test-real-case-30.wav,0.4355493,0.40344566,-0.032103628,"the keys are clanging together, producing a jangling sound."
+test-real-case-31.wav,0.40525857,0.38454276,-0.020715803,"the keys are colliding with each other, creating a jangling sound."
+test-real-case-32.wav,0.4891823,0.33793354,-0.15124875,roosters are calling continuously in the gentle breeze.
+test-real-case-33.wav,0.48932475,0.31027183,-0.17905292,roosters are calling continously in the wind.
+test-real-case-34.wav,0.08577603,0.0052653626,-0.08051067,"in a noisy environment, the birds are chirping incessantly."
+test-real-case-35.wav,0.05918878,0.18710366,0.12791488,"in the forest, the birds are chirping incessantly. "
+test-real-case-36.wav,0.2624251,0.15717226,-0.10525283,seagulls are squawking above the water.
+test-real-case-37.wav,0.19890754,0.0921274,-0.10678014,some seagulls are calling above the water.
+test-real-case-38.wav,0.10283056,0.18388914,0.08105858,many birds are chirping joyfully.
+test-real-case-39.wav,0.08953497,0.24783868,0.15830371,lots of birds are chirping in the wild.
+test-real-case-40.wav,0.09134568,0.1196993,0.028353617,someone is loading a gun.
+test-real-case-41.wav,0.069607675,0.10082727,0.031219594,someone is loading the gun.
+test-real-case-42.wav,0.27749854,0.10718443,-0.1703141,the fireworks are soaring into the sky and exploding.
+test-real-case-43.wav,0.3934586,0.2630991,-0.1303595,the fireworks are exploding far away.
+test-real-case-44.wav,0.51887167,0.5050044,-0.013867259,"the crowd is chanting and yelling, whose sound is becoming louder and louder."
+test-real-case-45.wav,0.5219764,0.4506114,-0.071365,a bunch of people are cheering in unison.
+test-real-case-46.wav,0.23784612,0.36161533,0.12376921,there is a child crying and shouting.
+test-real-case-47.wav,0.20083761,0.37410405,0.17326644,a little kid is screaming and crying.
+test-real-case-48.wav,0.15201491,0.09104235,-0.060972564,"from time to time, birds are chirping in the slightly noisy environment."
+test-real-case-49.wav,0.27744582,0.23960719,-0.037838638,"in the forest, the birds are chirping incessantly. "
+test-real-case-50.wav,0.32865947,0.23938009,-0.08927938,the water is flowing in the stream with a dribbling sound.
+test-real-case-51.wav,0.43320948,0.32127407,-0.11193541,the water is flowing and gurgling in the stream.
+test-real-case-52.wav,0.21096724,0.31846228,0.10749504,the waves are churning incessantly in the ocean.
+test-real-case-53.wav,0.21288529,0.35986412,0.14697883,the waves are surging in the ocean.
+test-real-case-54.wav,0.49068424,0.54710174,0.056417495,"someone is beating the drum, making a wonderful sound."
+test-real-case-55.wav,0.48462337,0.551696,0.06707263,someone is playing the drum to make rhythmic and dynamic sounds.
+test-real-case-56.wav,0.43606508,0.32752588,-0.108539194,"the engine begins to work, emitting a buzzing sound."
+test-real-case-57.wav,0.16263361,0.18305773,0.020424113,a group of birds are chirping in the distance.
+test-real-case-58.wav,0.21303998,0.32286856,0.10982858,the waves are crashing against the shore.
+test-real-case-59.wav,0.27271646,0.2722245,-0.00049197674,the waves are surfing over the sea with a splashing sound.
+test-real-case-60.wav,0.07503873,0.093073204,0.018034473,"someone is walking, whose footsteps blend with the roadway noise."
+test-real-case-61.wav,0.04748296,0.021919599,-0.025563361,someone is walking in the roadway noise.
+test-real-case-62.wav,0.48552933,0.5311957,0.045666367,"the fire crackles in the wind, creating a rhythmic and soothing sound."
+test-real-case-63.wav,0.49519628,0.32250518,-0.1726911,the constant sound of the fire burning could be heard.
+test-real-case-64.wav,0.3582896,0.44410962,0.08582002,waves are surging in the ocean with a splashing sound.
+test-real-case-65.wav,0.32916766,0.3554085,0.026240826,the waves are crashing against the shore.
+test-real-case-66.wav,0.17991814,0.27259353,0.09267539,a group of people are cheering.
+test-real-case-67.wav,0.13267563,0.28346172,0.15078609,a group of people are cheering loudly and enthusiastically.
+test-real-case-68.wav,0.08950834,0.19309038,0.10358204,someone is beating the drum continuously.
+test-real-case-69.wav,0.15057395,0.26567417,0.11510022,someone is playing drum kit to make rhythmic and dynamic sounds.
+test-real-case-70.wav,0.12290986,0.11298058,-0.009929277,a dog is barking in the distance.
+test-real-case-71.wav,0.2818765,0.41063416,0.12875766,the waves are beating against the shore.
+test-real-case-72.wav,0.5474336,0.4874432,-0.059990406,"with the blowing of wind, the wind chimes are making a crisp and sweet sound."
+test-real-case-73.wav,0.527743,0.55480677,0.027063787,the wind chime is ringing with a jingling sound as the wind blows.
+test-real-case-74.wav,0.52101827,0.31407744,-0.20694083,"as the two women chat, their silverware clatters together."
+test-real-case-75.wav,0.4848469,0.3200744,-0.16477248,a female is speaking and the cutlery is clanging.
+test-real-case-76.wav,0.43501025,0.38154948,-0.053460777,the train horn is sounding a honk sound.
+test-real-case-77.wav,0.40199116,0.34112787,-0.060863286,someone is honking the train horn to make a long blast.
+test-real-case-78.wav,0.4663961,0.5089549,0.04255879,the bicycle bell is ringing and echoing.
+test-real-case-79.wav,0.45426908,0.53332305,0.07905397,the bike's bell is making a crisp sound.
+test-real-case-80.wav,0.13041049,0.27268976,0.14227927,"in the forest, the birds are chirping incessantly."
+test-real-case-81.wav,0.16725211,0.2733382,0.10608609,lots of birds are chirping in the wild.
+test-real-case-82.wav,0.566679,0.48565677,-0.08102223,"the crickets in the grass are making a constant buzzing sound, adding to the evening's natural harmony."
+test-real-case-83.wav,0.46392304,0.4332729,-0.030650139,the crickets chirped continuously in the silent night.
+test-real-case-84.wav,0.34659433,0.20950957,-0.13708477,someone is pouring hot water into a thermos.
+test-real-case-85.wav,0.45799142,0.29661798,-0.16137344,someone is pouring the water into a container.
+test-real-case-86.wav,0.20455214,0.13526388,-0.06928827,the wind is blowing hard on the roadside.
+test-real-case-87.wav,0.22657019,0.24457131,0.018001124,blowing winds came from afar.
+test-real-case-88.wav,0.3388752,0.3610125,0.022137284,a man is delivering a speech to a woman.
+test-real-case-89.wav,0.032960795,0.29035133,0.25739053,a man is delivering a speech passionately and loudly.
+test-real-case-90.wav,0.42870829,0.14026946,-0.28843883,someone is honking the car horn.
+test-real-case-91.wav,0.43426773,0.14027889,-0.29398882,a car is honking on the road.
+test-real-case-92.wav,0.24986702,0.4532408,0.20337379,something is falling to the ground and making a clank.
+test-real-case-93.wav,0.2219705,0.34760767,0.12563717,some metalwork tumbles to the floor with a loud clatter.
+test-real-case-94.wav,0.5339113,0.36176845,-0.17214283,a fierce dog is barking continuously outdoors.
+test-real-case-95.wav,0.5563896,0.38018134,-0.17620823,the dog is barking loudly.
+test-real-case-96.wav,0.2192992,0.29330134,0.07400215,"the water is crashing against the shore constantly, creating small waves."
+test-real-case-97.wav,0.3429451,0.26859948,-0.07434562,the water is flowing in the stream with a gurgling sound.
+test-real-case-98.wav,0.24889216,0.3416726,0.09278044,the siren is ringing constantly in the roadway noise.
+test-real-case-99.wav,0.26757777,0.42930418,0.16172642,the siren is ringing and gradually fading into the roadway noise.
+test-real-case-100.wav,0.39415896,0.35805112,-0.03610784,"the fire crackles in the wind, creating a rhythmic and soothing sound."
+test-real-case-101.wav,0.4188643,0.2593602,-0.15950412,the fire is making crackling sounds as it burns.
+test-real-case-102.wav,0.34130958,0.26175246,-0.07955712,some of the silverware is rattling along.
+test-real-case-103.wav,0.1915426,0.30103293,0.109490335,the silverware is making a clanging sound.
+test-real-case-104.wav,0.23413372,0.14764307,-0.086490646,the crowd is chattering with ambiguous sounds.
+test-real-case-105.wav,0.25926945,0.34853792,0.089268476,the constant hum of crickets in the grass adds to the natural harmony of the night.
+test-real-case-106.wav,0.097878635,0.026246198,-0.07163244,the machine is vibrating and making clicking sounds.
+test-real-case-107.wav,0.07103044,0.05765868,-0.013371758,the machine is vibrating with the clicking sounds.
+test-real-case-108.wav,0.48112848,0.44437343,-0.036755055,the crowd is giving applause to express their excitement.
+test-real-case-109.wav,0.53018034,0.5371198,0.006939471,some people are clapping and cheering.
+test-real-case-110.wav,0.2481135,0.35985243,0.111738935,a lot of birds are chirping outdoors.
+test-real-case-111.wav,0.20735769,0.25852042,0.051162735,"in the forest, the birds are chirping incessantly."
+test-real-case-112.wav,0.1407458,0.1634084,0.022662595,the train is running on the railway with its wheels making squealing noises.
+test-real-case-113.wav,0.16006906,0.17763384,0.017564774,the train is running on the track with its squealing wheels.
+test-real-case-114.wav,0.19969636,0.21054351,0.010847151,some women are saying something in a vague way.
+test-real-case-115.wav,0.09162114,0.19707844,0.1054573,a woman is speaking loudly.
+test-real-case-116.wav,0.13792518,0.16008416,0.02215898,the vehicle's engine is vrooming.
+test-real-case-117.wav,0.06435769,0.20979245,0.14543477,someone is trying to making the engine start.
+test-real-case-118.wav,0.18931049,0.30837026,0.11905977,"in a noisy environment, the birds are chirping incessantly."
+test-real-case-119.wav,0.54989165,0.14158612,-0.40830553,a rooster is crowing at dawn.
+test-real-case-120.wav,0.23753417,0.23754795,1.3783574e-05,"people are engaging in conversation, chatting with each other, including women and men."
+test-real-case-121.wav,0.30256903,0.37457594,0.07200691,the crowd is chattering amidst the background noise.
+test-real-case-122.wav,0.22858049,0.21584438,-0.012736112,the raindrops are dripping on the surface with a dribbling sound.
+test-real-case-123.wav,0.23063363,0.22044148,-0.010192156,the heavy rain is pouring down and rustling on the ground.
+test-real-case-124.wav,0.4289981,0.47530323,0.04630512,the wind chimes are ringing in the wind.
+test-real-case-125.wav,0.4633218,0.46719664,0.0038748384,the wind chimes are making a crisp and sweet sound.
+test-real-case-126.wav,0.3851453,0.36003655,-0.025108755,a lot of birds are chirping loudly in the wild.
+test-real-case-127.wav,0.31846076,0.39027968,0.07181892,"in the forest, the birds are chirping incessantly."
+test-real-case-128.wav,0.25311345,0.22404629,-0.029067159,a train is running on the railway and emitting squealing sounds from its wheels.
+test-real-case-129.wav,0.26356593,0.18169177,-0.08187416,the train wheels are squealing on the railway.
+test-real-case-130.wav,0.40908444,0.38883045,-0.020253986,a car is passing when someone is using a spray.
+test-real-case-131.wav,0.16216168,0.11294966,-0.049212016,"cars are zooming by, causing a deafening racket."
+test-real-case-132.wav,0.2680531,0.25435963,-0.013693482,the clear chirping of birds keeps coming.
+test-real-case-133.wav,0.21078262,0.1948191,-0.015963525,a group of birds are chirping happily.
+test-real-case-134.wav,0.2226985,0.17587589,-0.046822608,a microwave oven is working with a buzzing sound.
+test-real-case-135.wav,0.23392801,0.17052537,-0.06340264,the microwave oven is producing a buzzing noise as it functions.
+test-real-case-136.wav,0.25640067,0.16274142,-0.09365925,the ducks are quacking beside the lake.
+test-real-case-137.wav,0.27201056,0.20484394,-0.06716663,a few ducks are quacking in the wind.
+test-real-case-138.wav,0.50779414,0.45526975,-0.052524388,the crows are making cawing noises all the time.
+test-real-case-139.wav,0.5356948,0.50375384,-0.031940937,the crow keeps making noise.
+test-real-case-140.wav,0.49921942,0.50306255,0.0038431287,the ducks are quacking nonstop.
+test-real-case-141.wav,0.5327837,0.5066043,-0.026179373,a group of ducks are quacking.
+test-real-case-142.wav,0.096658014,0.21054336,0.11388535,the sound of human voices keeps coming.
+test-real-case-143.wav,0.35075498,0.2788831,-0.07187188,the crowd is clapping along to the music to show their enthusiasm.
+test-real-case-144.wav,0.5809707,0.48415208,-0.096818626,the persistent chirping of crickets in the grass intensifies the natural harmony of the night.
+test-real-case-145.wav,0.5592957,0.42010596,-0.13918975,lots of crickets are chirping together in the grass.
+test-real-case-146.wav,0.5353846,0.5283843,-0.0070002675,there are plenty of wind chimes clashing together.
+test-real-case-147.wav,0.53687197,0.50933826,-0.02753371,the wind chimes keep swinging and making a clear and crisp sound.
+test-real-case-148.wav,0.30247796,0.22691649,-0.075561464,the cricket is calling continuously.
+test-real-case-149.wav,0.47801894,0.321088,-0.15693095,a lot of crickets are chirping loudly in the wild.
+test-real-case-150.wav,0.44773793,0.52980065,0.08206272,the wind chime is swaying and ringing with a jingling sound.
+test-real-case-151.wav,0.3891354,0.46107233,0.071936935,the wind chime is swaying and ringing in the air.
+test-real-case-152.wav,0.21315026,0.2024482,-0.010702059,"a truck is driving down the road, making noise."
+test-real-case-153.wav,0.16557828,0.19722986,0.031651586,an alarm is ringing constantly.
+test-real-case-154.wav,0.38040406,0.3848039,0.004399836,the musical instrument is making buzzing sound effects.
+test-real-case-155.wav,0.29656273,0.27595228,-0.020610452,a musical instrument is sounding a buzzing sound.
+test-real-case-156.wav,0.055229597,0.0625856,0.007356003,raindrops are falling on the ground.
+test-real-case-157.wav,0.599794,0.55362606,-0.04616791,the thunder is heavily rumbling.
+test-real-case-158.wav,0.13336305,0.13181235,-0.0015507042,the clock is making a ticking sound.
+test-real-case-159.wav,0.05012477,0.034613952,-0.015510816,the clock is ringing with a sound of tick-tock.
+test-real-case-160.wav,0.36668456,0.31471756,-0.051966995,the tick-tock sound is a constant reminder of passing time.
+test-real-case-161.wav,0.37266308,0.27888116,-0.09378192,something is emitting a constant sound of tick-tock.
+test-real-case-162.wav,0.25969562,0.33985335,0.08015773,the car is creating a loud noise as it passes by on the road.
+test-real-case-163.wav,0.30187517,0.348296,0.046420813,the engine's vrooming is getting louder as the race car approaches.
+test-real-case-164.wav,0.44230524,0.33973232,-0.10257292,the radio is buzzing and emitting static noises.
+test-real-case-165.wav,0.4553253,0.24764906,-0.20767625,a man's voice is being emitted on the radio.
+test-real-case-166.wav,0.37456003,0.22389211,-0.15066792,the seagull is squawking with the faint human voices.
+test-real-case-167.wav,0.3535581,0.13621287,-0.21734522,"the wind is blowing, and seagulls are calling in the background. "
+test-real-case-168.wav,0.18570556,0.13095078,-0.05475478,the siren is alarming continuously.
+test-real-case-169.wav,0.37743938,0.31481624,-0.06262314,an alarm is ringing to draw people's attention.
+test-real-case-170.wav,0.28610536,0.3811825,0.09507713,the bell is ringing with faint echoes.
+test-real-case-171.wav,0.29556927,0.39946547,0.1038962,the bell is ringing and emitting faint echoes.
+test-real-case-172.wav,0.28975832,0.2408923,-0.04886602,some people are talking with each other.
+test-real-case-173.wav,0.32058358,0.25822118,-0.062362403,a man and a woman are chatting in a slight noisy place.
+test-real-case-174.wav,0.24622078,0.30082947,0.054608688,the wind chimes are making a crisp and sweet sound.
+test-real-case-175.wav,0.277323,0.29874933,0.02142632,the wind chimes are creating a clear and melodious sound.
+test-real-case-176.wav,0.29420894,0.41364667,0.119437724,the water is dribbling and emitting echoes in the room.
+test-real-case-177.wav,0.18205193,0.26366884,0.08161691,"the liquid is dripping onto the ground, which makes a splashing sound."
+test-real-case-178.wav,0.40359908,0.2876989,-0.11590019,many birds are chirping in the wild.
+test-real-case-179.wav,0.28584242,0.32280183,0.03695941,"in the forest, the birds are chirping incessantly."
+test-real-case-180.wav,0.25434485,0.21403386,-0.040310994,a man is stir-frying food and the oil is making a sizzling sound.
+test-real-case-181.wav,0.40208012,0.30077103,-0.10130909,"someone is frying the food in the kitchen, which makes a sizzling sound."
+test-real-case-182.wav,0.33781207,0.38133532,0.043523252,some birds are chirping in the forest.
+test-real-case-183.wav,0.30496502,0.3578774,0.052912384,"in the forest, the birds are chirping incessantly. "
+test-real-case-184.wav,0.16594507,0.17601477,0.010069698,"the train is running on the tracks, and its wheels make a huge roar."
+test-real-case-185.wav,0.20055401,0.22037546,0.01982145,"the train is moving along the tracks, producing a low rumble."
+test-real-case-186.wav,0.040551383,0.048380535,0.007829152,"a vehicle is speeding by, creating a deafening din."
+test-real-case-187.wav,-0.061375268,0.0140343,0.07540957,the birds are chirping and the ducks are quacking.
+test-real-case-188.wav,0.38817617,0.2717732,-0.11640298,a lot of crickets are chirping together in the environmental noise.
+test-real-case-189.wav,0.40412515,0.42853597,0.024410814,crickets are vocalizing amidst the loud environmental noise.
+test-real-case-190.wav,0.26520294,0.2711286,0.0059256554,"many keys are colliding with each other, making a clanging sound."
+test-real-case-191.wav,0.28270823,0.33694944,0.05424121,keys are colliding and making crisp jangling sounds.
+test-real-case-192.wav,0.36292368,0.22835433,-0.13456935,"birds are chirping in the wild, blending with someone's footsteps."
+test-real-case-193.wav,0.37328514,0.21973151,-0.15355363,some birds are chirping with a crunching sound of footsteps.
+test-real-case-194.wav,0.41895366,0.3514081,-0.06754556,a lot of birds are chirping in the forest.
+test-real-case-195.wav,0.4496482,0.4310658,-0.018582404,the clear chirping of cuckoos keeps coming.
+test-real-case-196.wav,0.13962278,0.2797158,0.14009303,"in a noisy environment, the birds are chirping incessantly."
+test-real-case-197.wav,0.24246238,0.27828515,0.035822764,birds are engaging in vocalizations and producing bird songs.
+test-real-case-198.wav,0.24562761,0.19939074,-0.046236873,"the crowd is cheering, yelling, whistling, and applauding enthusiastically."
+test-real-case-199.wav,0.49246994,0.4932686,0.00079867244,a group of people are shouting slogans and then talking to each other.
