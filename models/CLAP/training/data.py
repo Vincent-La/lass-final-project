@@ -528,9 +528,14 @@ def get_audio_features(
             if len(audio_data) < max_len:  # do nothing if equal
                 if data_filling == "repeatpad":
                     n_repeat = int(max_len / len(audio_data))
+
+                    # print('HERE')
+                    # print(n_repeat)
                     audio_data = audio_data.repeat(n_repeat)
                     # audio_data = audio_data.unsqueeze(0).unsqueeze(0).unsqueeze(0)
                     # audio_data = F.interpolate(audio_data,size=max_len,mode="bicubic")[0,0,0]
+
+                    # print('NOT HERE')
                     audio_data = F.pad(
                         audio_data,
                         (0, max_len - len(audio_data)),

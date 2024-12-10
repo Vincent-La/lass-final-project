@@ -34,13 +34,16 @@ class DCASEEvaluatorAnalysis:
         sampling_rate=16000,
         eval_indexes='lass_synthetic_validation.csv',
         audio_dir='lass_validation',
-        output_dir = 'lass_validation_output'
+        output_dir = 'lass_validation_output',
+        encoder_type = None
     ) -> None:
         r"""DCASE T9 LASS evaluator.
 
         Returns:
             None
         """
+
+        assert encoder_type != None, 'need to initialize encoder_type'
 
         self.sampling_rate = sampling_rate
 
@@ -51,6 +54,7 @@ class DCASEEvaluatorAnalysis:
         self.eval_list = eval_list
         self.audio_dir = audio_dir
         self.output_dir = output_dir
+        self.encoder_type = encoder_type
 
     def __call__(
         self,
@@ -74,6 +78,7 @@ class DCASEEvaluatorAnalysis:
                 
                 result = {}
                 source, noise, snr, caption = eval_data
+                result['caption'] = caption
 
                 # TODO: source-noise-ratio ?
                 snr = int(snr)
@@ -131,36 +136,64 @@ class DCASEEvaluatorAnalysis:
                 wf.write(output_path, self.sampling_rate, sep_segment)
                 result['output_path'] = output_path
 
-                # similarities = dict(
-                #     filename = filename
-                # )
 
                 # COMPUTE SIMILARITIES
-                src_audios, audio_padding_masks = pl_model.query_encoder.model.process_audio([input_path])
-                audio_features = pl_model.query_encoder.model.extract_audio_features(src_audios, audio_padding_masks)
-                input_similarity = conditions @ audio_features.T
-                # similarities['input_similarity'] = input_similarity.squeeze(0).cpu().numpy()[0]
-                # print(f'Text Prompt - Mixed Audio Input Similarity: {input_similarity}')  
-                result['input_similarity'] = input_similarity
+                if self.encoder_type == 'ONE-PEACE':
+                    src_audios, audio_padding_masks = pl_model.query_encoder.model.process_audio([input_path])
+                    audio_features = pl_model.query_encoder.model.extract_audio_features(src_audios, audio_padding_masks)
+                    input_similarity = conditions @ audio_features.T
+                    # similarities['input_similarity'] = input_similarity.squeeze(0).cpu().numpy()[0]
+                    # print(f'Text Prompt - Mixed Audio Input Similarity: {input_similarity}')  
+                    result['input_similarity'] = input_similarity.squeeze(0).cpu().numpy()[0]
 
-                src_audios, audio_padding_masks = pl_model.query_encoder.model.process_audio([output_path])
-                audio_features = pl_model.query_encoder.model.extract_audio_features(src_audios, audio_padding_masks)
-                output_similarity = conditions @ audio_features.T
-                result['output_similarity'] = output_similarity
-                # similarities['output_similarity'] = output_similarity.squeeze(0).cpu().numpy()[0]
+                    src_audios, audio_padding_masks = pl_model.query_encoder.model.process_audio([output_path])
+                    audio_features = pl_model.query_encoder.model.extract_audio_features(src_audios, audio_padding_masks)
+                    output_similarity = conditions @ audio_features.T
+                    result['output_similarity'] = output_similarity.squeeze(0).cpu().numpy()[0]
+                    # similarities['output_similarity'] = output_similarity.squeeze(0).cpu().numpy()[0]
+
+                    src_audios, audio_padding_masks = pl_model.query_encoder.model.process_audio([source_path])
+                    audio_features = pl_model.query_encoder.model.extract_audio_features(src_audios, audio_padding_masks)
+                    target_similarity = conditions @ audio_features.T
+                    result['target_similarity'] = target_similarity.squeeze(0).cpu().numpy()[0]
+                
+                elif self.encoder_type == 'CLAP':
+                    
+                    audio_features = pl_model.query_encoder._get_audio_embed(input_dict['mixture'][0])
+                    # print('mixture shape: input_dict shape {}'.format(input_dict['mixture'][0].shape))
+                    input_similarity = conditions @ audio_features.T
+                    result['input_similarity'] = input_similarity.squeeze(0).cpu().numpy()[0]
+
+                    sep_segment_tensor = torch.tensor(sep_segment).unsqueeze(0).to(device)
+                    # print(f'sep_segment: {sep_segment_tensor.shape}')
+                    audio_features = pl_model.query_encoder._get_audio_embed(sep_segment_tensor)
+                    output_similarity = conditions @ audio_features.T
+                    result['output_similarity'] = output_similarity.squeeze(0).cpu().numpy()[0]
+
+                    source_tensor = torch.tensor(source).unsqueeze(0).to(device)
+                    # print(f'source shape:{source_tensor.shape}')
+                    audio_features = pl_model.query_encoder._get_audio_embed(source_tensor)
+                    target_similarity = conditions @ audio_features.T
+                    result['target_similarity'] = target_similarity.squeeze(0).cpu().numpy()[0]
+                
                 
                 sdr = calculate_sdr(ref=source, est=sep_segment)
                 sdri = sdr - sdr_no_sep
                 sisdr = calculate_sisdr(ref=source, est=sep_segment)
 
+                # print(type(sdr))
+                # print(type(sdri))
+                # print(type(sisdr))
+
                 sisdrs_list.append(sisdr)
-                result['sisdr'] = sisdr
+                result['sisdr'] = float(sisdr)
                 sdris_list.append(sdri)
-                result['sdri'] = sdri
+                result['sdri'] = float(sdri)
                 sdrs_list.append(sdr)
-                result['sdr'] = sdr
+                result['sdr'] = float(sdr)
 
                 gather.append(result)
+                
         
         mean_sdri = np.mean(sdris_list)
         mean_sisdr = np.mean(sisdrs_list)
