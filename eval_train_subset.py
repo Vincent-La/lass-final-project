@@ -1,4 +1,4 @@
-from dcase_evaluator_analysis import DCASEEvaluatorAnalysis
+from training_subset_analysis import TrainingSubsetAnalysis
 from models.audiosep import AudioSep
 import argparse
 import os
@@ -31,7 +31,7 @@ def eval(evaluator,
         query_encoder.model.model.eval()
 
     elif encoder_type == 'CLAP':
-        from models.one_peace_encoder import CLAP_Encoder
+        from models.clap_encoder import CLAP_Encoder
         query_encoder = CLAP_Encoder(pretrained_path=encoder_checkpoint_path).eval()
 
     pl_model = load_ss_model(
@@ -84,13 +84,14 @@ if __name__ == '__main__':
     args = parser.parse_args()
     print(args)
 
-    # Run evaluation on training subset + pull out per-sample metrics and similarity scores
-    dcase_evaluator = DCASEEvaluatorAnalysis(
+   # Run evaluation on training subset + pull out per-sample metrics and similarity scores
+    dcase_evaluator = TrainingSubsetAnalysis(
         sampling_rate=16000,
         eval_indexes='lass_training_subset.csv',
         audio_dir= '',        # use absolute paths in eval_indexes csv file
         output_dir = None,    # set to none to avoid making audio .wav files
-        encoder_type=args.encoder_type
+        encoder_type=args.encoder_type,
+        config_yaml = args.config_yaml
     )
 
     eval(dcase_evaluator,
@@ -99,4 +100,3 @@ if __name__ == '__main__':
          config_yaml = args.config_yaml,
          device = "cuda",
          encoder_type=args.encoder_type)
-

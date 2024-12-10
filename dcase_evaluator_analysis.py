@@ -11,6 +11,9 @@ import librosa
 import lightning.pytorch as pl
 from models.clap_encoder import CLAP_Encoder
 import scipy.io.wavfile as wf
+import random
+
+# from data.waveform_mixers import dynamic_loudnorm
 
 
 # sys.path.append('../dcase2024_task9_baseline/')
@@ -23,7 +26,6 @@ from utils import (
     parse_yaml,
     get_mean_sdr_from_dict,
 )
-
 
 class DCASEEvaluatorAnalysis:
     def __init__(
@@ -78,9 +80,7 @@ class DCASEEvaluatorAnalysis:
                 result = {}
                 source, noise, snr, caption = eval_data
                 result['caption'] = caption
-
-                # TODO: source-noise-ratio ?
-                snr = int(snr)
+            
 
                 source_path = os.path.join(self.audio_dir, f'{source}.wav')
                 noise_path = os.path.join(self.audio_dir, f'{noise}.wav')
@@ -88,14 +88,29 @@ class DCASEEvaluatorAnalysis:
                 result['noise_path'] = noise_path
                 
                 source, fs = librosa.load(source_path, sr=self.sampling_rate, mono=True)
-                noise, fs = librosa.load(noise_path, sr=self.sampling_rate, mono=True)
+                
+                # snr provided
+                if snr != '':
+                    noise, fs = librosa.load(noise_path, sr=self.sampling_rate, mono=True)
+                    snr = int(snr)
+                    # create audio mixture with a specific SNR level
+                    source_power = np.mean(source ** 2)
+                    noise_power = np.mean(noise ** 2)
+                    desired_noise_power = source_power / (10 ** (snr / 10))
+                    scaling_factor = np.sqrt(desired_noise_power / noise_power)
+                    noise = noise * scaling_factor
+                
+                # modify noise waveform in the same way that we do for training
+                else:
+                    pass
+                    # noise_segment, fs  = librosa.load(noise_path, sr=self.sampling_rate, mono=True)
+                    # noise = np.zeros_like(source)
 
-                # create audio mixture with a specific SNR level
-                source_power = np.mean(source ** 2)
-                noise_power = np.mean(noise ** 2)
-                desired_noise_power = source_power / (10 ** (snr / 10))
-                scaling_factor = np.sqrt(desired_noise_power / noise_power)
-                noise = noise * scaling_factor
+                    # # NOTE: this happens essentially twice in training b/c the code is written to 
+                    # # accomodate for >2 audios used in a mixture
+                    # noise += _dynamic_loudnorm(audio=noise_segment, reference=source, **self.loudness_param)
+                    # noise = _dynamic_loudnorm(audio=noise, reference=source, **self.loudness_param)
+                    # print('this works!')
 
                 mixture = source + noise
 
@@ -192,7 +207,6 @@ class DCASEEvaluatorAnalysis:
                 result['sdr'] = float(sdr)
 
                 gather.append(result)
-                break
                 
         
         # mean_sdri = np.mean(sdris_list)
@@ -203,38 +217,3 @@ class DCASEEvaluatorAnalysis:
         
 
         return df_results
-    
-
-
-def eval(evaluator, checkpoint_path, config_yaml='config/audiosep_base.yaml', device = "cuda"):
-    configs = parse_yaml(config_yaml)
-
-    # Load model
-    query_encoder = CLAP_Encoder().eval()
-
-    pl_model = load_ss_model(
-        configs=configs,
-        checkpoint_path=checkpoint_path,
-        query_encoder=query_encoder
-    ).to(device)
-
-    print(f'-------  Start Evaluation  -------')
-
-    # evaluation 
-    SISDR, SDRi, SDR = evaluator(pl_model)
-    msg_clotho = "SDR: {:.3f}, SDRi: {:.3f}, SISDR: {:.3f}".format(SDR, SDRi, SISDR)
-    print(msg_clotho)
-
-    print('-------------------------  Done  ---------------------------')
-
-
-if __name__ == '__main__':
-    dcase_evaluator = DCASEEvaluator(
-        sampling_rate=16000,
-        eval_indexes='lass_synthetic_validation.csv',
-        audio_dir='lass_validation',
-    )
-
-    # checkpoint_path='audiosep_16k,baseline,step=200000.ckpt'
-    checkpoint_path='checkpoint/audiosep_baseline.ckpt'
-    eval(dcase_evaluator, checkpoint_path, device = "cuda")

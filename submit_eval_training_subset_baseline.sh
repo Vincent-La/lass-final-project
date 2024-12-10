@@ -27,10 +27,10 @@ module load cuda
 source ~/.bashrc
 micromamba activate LASS
 
-srun python eval_train_subset.py --config_yaml config/audiosep_onepeace.yaml \
-                                 --encoder_checkpoint_path /fs/nexus-scratch/vla/finetune_al_retrieval.pt \
-                                 --ssnet_checkpoint_path /fs/nexus-scratch/vla/checkpoints/train/audiosep_onepeace,devices=1/step=140000.ckpt \
-                                 --encoder_type ONE-PEACE
+srun python eval_train_subset.py --config_yaml config/audiosep_base.yaml \
+                                 --encoder_checkpoint_path ./checkpoint/music_speech_audioset_epoch_15_esc_89.98.pt \
+                                 --ssnet_checkpoint_path checkpoint/audiosep_baseline.ckpt \
+                                 --encoder_type CLAP
 
 
 wait                                                            # wait for any background processes to complete
