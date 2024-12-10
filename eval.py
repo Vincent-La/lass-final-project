@@ -1,4 +1,4 @@
-from dcase_evaluator import DCASEEvaluator
+from dcase_evaluator import DCASEEvaluatorAnalysis
 from models.audiosep import AudioSep
 from models.one_peace_encoder import ONE_PEACE_Encoder
 
@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    dcase_evaluator = DCASEEvaluator(
+    dcase_evaluator = DCASEEvaluatorAnalysis(
         sampling_rate=16000,
         eval_indexes='lass_synthetic_validation.csv',
         audio_dir='lass_validation',
@@ -77,4 +77,4 @@ if __name__ == '__main__':
          encoder_checkpoint_path = args.encoder_checkpoint_path,
          ssnet_checkpoint_path = args.ssnet_checkpoint_path,
          config_yaml = args.config_yaml,
-         device = "cuda")
+         device = "cuda",)
