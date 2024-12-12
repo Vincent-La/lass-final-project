@@ -26,6 +26,11 @@ conda activate LASS
 python -m ipykernel install --user --name LASS
 ```
 
+Pip install the rest of the ONE-PEACE dependencies
+```
+pip install -r requirements.txt
+```
+
 Then, try to run [`test.ipynb`](test.ipynb)
 
 
