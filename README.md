@@ -26,7 +26,12 @@ conda activate LASS
 python -m ipykernel install --user --name LASS
 ```
 
-Then, try to run [`test.ipynb`](test.ipynb)
+Pip install the rest of the ONE-PEACE dependencies
+```
+pip install -r requirements.txt
+```
+
+Then, try to run [`test_environment.ipynb`](test_environment.ipynb)
 
 
 ## Baseline Model Evaluation Setup
@@ -57,7 +62,7 @@ mv audiosep_16k\,baseline\,step\=200000.ckpt audiosep_baseline.ckpt
 Run Eval script
 ```
 # Using SLURM job
-sbatch submit.sh
+sbatch submit_scripts/submit.sh
 
 # or directly from python script
 python dcase_evaluator.py

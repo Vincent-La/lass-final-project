@@ -40,8 +40,9 @@
 \usepackage{todonotes}
 \usepackage{booktabs}
 \usepackage{multirow}
-
-
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[margin=1in]{geometry}
 
 % If the title and author information does not fit in the area allocated, uncomment the following
 %
@@ -134,18 +135,40 @@ Language-queried audio source separation (LASS) is the task of isolating arbitra
 Performance on multi-modal downstream tasks has significantly improved in recent years as representation models that align different modalities have become more popular. These representation models seek to encode different types of input into a shared embedding space where similar concepts across different modalities are close to each other. In the audio-language domain, Contrastive Language-Audio Pretraining (CLAP) \cite{clap} has emerged as a prominent model for a variety of tasks.
 
 One particular downstream audio-language task where CLAP has been used is Language-queried audio source separation (LASS) \cite{lass}. LASS is the task of isolating arbitrary sounds using a natural language description of the desired source. Given some input audio with multiple sources of sound, the goal is to mask out audio sources that are unrelated to the language query. The alignment between audio and language modalities in the CLAP embedding space is 
-\todo[inline]{smth about how modality alignment in shared emebedding space is important for LASS --> tie into ONE-PEACE --> compare retrieval performance to argue that ONE-PEACE generally has the better alignment}
+\todo[inline]{smth about how modality alignment in shared embedding space is important for LASS --> tie into ONE-PEACE --> compare retrieval performance to argue that ONE-PEACE generally has the better alignment}
 
+\section{Related Work}
 
+\subsection{Language-Queried Audio Source Separation}
+Language-Queried Audio Source Separation (LASS) achieves the task of separating arbitrary sound sources using natural language descriptions of the desired source. The language query is passed to the QueryNet, which encodes the query into an embedding space. Generally, within this embedding space, audio and language modalities are aligned. A Short-time Fourier transform is applied to the input mixture waveform, which converts the raw audio data into a spectrogram representing the evolution of the signal’s frequency content over time. Both of the resulting representations are then sent to SeparationNet, which uses the embedded language query to determine the frequencies of the audio data to preserve and cut. The embedded language query is incorporated into the SeparationNet via Feature-wise Linearly modulated (FiLm) layers. The FiLm layers are small fully-connected networks that learn modulation parameters that are applied per feature map, to contextualize the SeparationNet hidden representations with the language query. Finally, the output frequencies are put into an inverse STFT to convert them back to raw audio data. 
 
+\todo[inline]{CITE: https://arxiv.org/pdf/2206.04769}
+\subsection{Contrastive Language-Audio Pretraining}
+Contrastive Language-Audio Pretraining (CLAP) is an approach that learns to connect natural language and audio modalities. Using two encoders and contrastive learning, a multimodal joint space can be created with audio and text descriptions. The audio encoder is used to process audio data and the text encoder handles natural language text queries. These encoders are trained simultaneously using contrastive learning, which maximizes the similarity of aligned audio-text pairs in a shared embedding space while minimizing the similarity of unaligned pairs. CLAP utilizes a symmetric cross-entropy loss over a similarity matrix to optimize the audio and text encoders. The loss function ensures that the embeddings of aligned audio-text pairs are close in the embedding space, while unaligned pairs are further apart. In testing, the audio encoder generates embeddings for audio inputs and the text encoder produces embeddings for text queries to compare in the embedding space. CLAP has an embedding dimension size of 512.
+
+\subsection{ONE-PEACE}
+
+The embedding dimension size of ONE-PEACE is 1536, three times larger than CLAP.
 
 \section{Methods}
+\subsection{LASS Baseline Approach}
+\subsection{ONE-PEACE LASS}
 % (16k Hz, window size 1024, hop size 160)
-We use the baseline model from the DCASE 2024 Task 9 challenge \todo{how to cite DCASE workshop?}, which is a scaled-down version of the full AudioSep model. 
+We used the baseline model from the DCASE 2024 Task 9 challenge \todo{how to cite DCASE workshop?}, which is a scaled-down version of the full AudioSep model. 
 
 \todo[inline]{CLAP model is using HTSAT and Roberta as base models, ONE-PEACE trained from scratch without pretrained initializations}
 
+\section{Results}
 
+\begin{figure}[t]
+  \includegraphics[width=\columnwidth]{plots/validation_plots.png}
+  \caption{Results on DCASE 2024 T9 Validation Set}
+  \label{fig:validation_results}
+\end{figure}
+
+% NOTE: COMMENT THIS OUT FOR FASTER PDF RENDER
+% Visual Spectrograms
+% \input{final_report/latex/visual_spectrograms}
 
 \begin{table*}[ht]
 \centering
@@ -169,8 +192,6 @@ We use the baseline model from the DCASE 2024 Task 9 challenge \todo{how to cite
     
     \caption{Comparison of audio-text retrieval performance, taken from the CLAP and ONE-PEACE papers}
 \end{table*}
-
-
 
 
 \begin{table*}
@@ -414,7 +435,7 @@ ACL 2002 by Eugene Charniak and Dekang Lin,
 and earlier ACL and EACL formats written by several people, including
 John Chen, Henry S. Thompson and Donald Walker.
 Additional elements were taken from the formatting instructions of the \emph{International Joint Conference on Artificial Intelligence} and the \emph{Conference on Computer Vision and Pattern Recognition}.
-
+N
 % Bibliography entries for the entire Anthology, followed by custom entries
 %\bibliography{anthology,custom}
 % Custom bibliography entries only
