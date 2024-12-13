@@ -43,7 +43,6 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage[margin=1in]{geometry}
-\usepackage{verbatim}
 
 % If the title and author information does not fit in the area allocated, uncomment the following
 %
@@ -160,14 +159,16 @@ We used the baseline model from the DCASE 2024 Task 9 challenge \todo{how to cit
 \todo[inline]{CLAP model is using HTSAT and Roberta as base models, ONE-PEACE trained from scratch without pretrained initializations}
 
 \section{Results}
-\documentclass{article}
-\usepackage{graphicx}
-\usepackage{subcaption}
-\usepackage[margin=1in]{geometry}
 
+\begin{figure}[t]
+  \includegraphics[width=\columnwidth]{plots/validation_plots.png}
+  \caption{Results on DCASE 2024 T9 Validation Set}
+  \label{fig:validation_results}
+\end{figure}
 
+% NOTE: COMMENT THIS OUT FOR FASTER PDF RENDER
 % Visual Spectrograms
-\input{final_report/latex/visual_spectrograms}
+% \input{final_report/latex/visual_spectrograms}
 
 \begin{table*}[ht]
 \centering
