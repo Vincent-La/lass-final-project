@@ -42,7 +42,8 @@
 \usepackage{multirow}
 \usepackage{graphicx}
 \usepackage{subcaption}
-\usepackage[margin=1in]{geometry}
+\usepackage{geometry}
+\usepackage{amsmath}
 
 % If the title and author information does not fit in the area allocated, uncomment the following
 %
@@ -122,13 +123,11 @@
 
 \begin{document}
 \maketitle
+
 \begin{abstract}
-\todo{idk if people include citations in the abstract but i have the mains one included for now -Vincent}
 
-Language-queried audio source separation (LASS) is the task of isolating arbitrary sounds using a natural language description of the desired source. We modify AudioSep \cite{audiosep}, a LASS architecture, by replacing the QueryNet with ONE-PEACE \cite{onepeace}, which is a general representation model for aligning vision, audio, language, and potentially unlimited modalities. The original AudioSep architecture is used as a baseline comparison, where CLAP is used as the QueryNet. We find that ONE-PEACE only performs comparably on LASS, despite significantly outperforming CLAP on other downstream audio-language tasks like retrieval.
+Language-queried audio source separation (LASS) is the task of isolating arbitrary sounds using a natural language description of the desired source. We modify AudioSep, a LASS architecture, by replacing the QueryNet with ONE-PEACE, which is a general representation model for aligning vision, audio, language, and potentially unlimited modalities. The original AudioSep architecture is used as a baseline comparison, where CLAP is used as the QueryNet. We find that ONE-PEACE only performs comparably on LASS, despite significantly outperforming CLAP on other downstream audio-language tasks like retrieval.
 
-
-% It has significantly more parameters than CLAP, includes alignments for visual data (and potentially more modalities), and outperforms CLAP on text to audio retrieval tasks.
 \end{abstract}
 
 \section{Introduction}
@@ -142,59 +141,61 @@ One particular downstream audio-language task where CLAP has been used is Langua
 \subsection{Language-Queried Audio Source Separation}
 Language-Queried Audio Source Separation (LASS) achieves the task of separating arbitrary sound sources using natural language descriptions of the desired source. The language query is passed to the QueryNet, which encodes the query into an embedding space. Generally, within this embedding space, audio and language modalities are aligned. A Short-time Fourier transform is applied to the input mixture waveform, which converts the raw audio data into a spectrogram representing the evolution of the signal’s frequency content over time. Both of the resulting representations are then sent to SeparationNet, which uses the embedded language query to determine the frequencies of the audio data to preserve and cut. The embedded language query is incorporated into the SeparationNet via Feature-wise Linearly modulated (FiLm) layers. The FiLm layers are small fully-connected networks that learn modulation parameters that are applied per feature map, to contextualize the SeparationNet hidden representations with the language query. Finally, the output frequencies are put into an inverse STFT to convert them back to raw audio data. 
 
-\todo[inline]{CITE: https://arxiv.org/pdf/2206.04769}
+% DONE! use \cite{clap2022}   <-- this is the microsoft paper that introduces CLAP
+% \todo[inline]{CITE: https://arxiv.org/pdf/2206.04769}
 \subsection{Contrastive Language-Audio Pretraining}
-Contrastive Language-Audio Pretraining (CLAP) is an approach that learns to connect natural language and audio modalities. Using two encoders and contrastive learning, a multimodal joint space can be created with audio and text descriptions. The audio encoder is used to process audio data and the text encoder handles natural language text queries. These encoders are trained simultaneously using contrastive learning, which maximizes the similarity of aligned audio-text pairs in a shared embedding space while minimizing the similarity of unaligned pairs. CLAP utilizes a symmetric cross-entropy loss over a similarity matrix to optimize the audio and text encoders. The loss function ensures that the embeddings of aligned audio-text pairs are close in the embedding space, while unaligned pairs are further apart. In testing, the audio encoder generates embeddings for audio inputs and the text encoder produces embeddings for text queries to compare in the embedding space. CLAP has an embedding dimension size of 512.
+Contrastive Language-Audio Pretraining (CLAP) \cite{clap2022} is an approach that learns to connect natural language and audio modalities. Using two encoders and contrastive learning, a multimodal joint space can be created with audio and text descriptions. The audio encoder is used to process audio data and the text encoder handles natural language text queries. These encoders are trained simultaneously using contrastive learning, which maximizes the similarity of aligned audio-text pairs in a shared embedding space while minimizing the similarity of unaligned pairs. CLAP utilizes a symmetric cross-entropy loss over a similarity matrix to optimize the audio and text encoders. The loss function ensures that the embeddings of aligned audio-text pairs are close in the embedding space, while unaligned pairs are further apart. In testing, the audio encoder generates embeddings for audio inputs and the text encoder produces embeddings for text queries to compare in the embedding space. CLAP has an embedding dimension size of 512.
 
 \subsection{ONE-PEACE}
 
 The embedding dimension size of ONE-PEACE is 1536, three times larger than CLAP.
 
 \section{Methods}
-\subsection{LASS Baseline Approach}
-\subsection{ONE-PEACE LASS}
+We compare AudioSep-OP with a baseline AudioSep model from the DCASE 2024 T9 challenge, \todo{how to cite DCASE workshop?} which we refer to as AudioSep-CLAP. We use the AudioSep-CLAP provided checkpoint for evaluation and train AudioSep-OP ourselves.
+
+% clap checkpoint is \verb|music_speech_audioset_epoch_15_esc_89.98.pt|
+\subsection{QueryNet}
+AudioSep-CLAP uses the text encoder of CLAP for the QueryNet whereas AudioSep-OP uses the text encoder of ONE-PEACE. The CLAP pretrained checkpoint we used was trained on music, speech, Audioset, and LAION-Audio-630k \todo{cite this dataset? or maybe the clap repo itself}. We evaluate two different ONE-PEACE pretrained checkpoints: the baseline pretrained checkpoint (AudioSep-OP\_full), and a checkpoint finetuned for audio-language retrieval on AudioCaps (AudioSep-OP\_al) \todo{cite audiocaps and clotho?} and Clotho. The QueryNet is frozen during training, per the AudioSep training specifications. \todo{full one-peace checkpoint is larger but it's not like we use the image or audio branches...}
+
+\subsection{SeparationNet}
+All models in our study use a ResUNet for the SeparationNet. It consists of 7 encoder blocks and 6 decoder blocks. The FiLm layers are scaled accordingly to accommodate the embedding dimension size of CLAP or ONE-PEACE. 
+
+\subsection{Training Setup}
+We replicate as much of the DCASE 2024 T9 challenge training setup as we can for a fair comparison between models. During training, synthetic mixtures are created on the fly by mixing two randomly selected audios within a batch. We use the loudness augmentation method described in \cite{kong2023universal}. To create an input mixture $x$ from audio samples $a_1$ and $a_2$, we calculate the energy of $a_1$ and $a_2$, denoted as $E_1$ and $E_2$, by $E = \ \left\vert\vert s \vert\right\vert^2_2 $. A Signal-to-Noise Ratio (SNR) is chosen randomly from a range of [-10,10] decibels and used to compute a scaling factor $s$ using the formula:
+
+\begin{equation}
+  \label{eq:scale}
+  s = \sqrt{\frac{E_1}{E_2} \cdot 10^{\text{SNR}/10}}
+\end{equation}
+
+\noindent $s$ ensures that the input mixture $x$ has the specified SNR. $x$ is then computed as:
+
+\begin{equation}
+    \label{mixture}
+    x = a_1 + s a_2
+\end{equation}
+
+
+All audio samples are resampled to mono 16 kHz (before mixture) and each sample is padded or randomly cropped to a length of 10 seconds. When extracting a spectrogram from the input mixture signal, we use a Short-time Fourier Transform (STFT) implemented by the \verb|librosa| library. A window size of 1024 and a hop size of 160 are used with a hann (raised cosine) window.
+
+The AudioSep models are trained end-to-end with an L1 waveform loss function denoted as
+
+\begin{equation}
+    L_1 = \ \left\vert\vert s - \hat{s} \vert\right\vert_1
+\end{equation}
+
+\noindent which is equivalent to the mean absolute error between the target waveform $s$ and the predicted waveform $\hat{s}$. All models are trained for 200k steps with a batch size of 16. We trained on a single Nvidia RTX A6000 GPU which took around 2 days.
+
+
+\subsection{Training Datasets}
+The models are trained using Clothov2 \cite{clotho} and augmented FSD50K \cite{fsd50k} datasets. Clotho is an audio captioning dataset, so when an audio from this dataset is selected as the source, a corresponding caption is used as the language query to the AudioSep model. FSD50k is an audio classification dataset with human-labeled audio events. The DCASE 2024 T9 creators generate automatic captions for each audio clip in FSD50K by prompting a GPT-4 \todo{do we have to cite chatgpt lmao} model with its sound event tags. 
+
+
+
+\subsection{AudioSep-OP}
 % (16k Hz, window size 1024, hop size 160)
-We used the baseline model from the DCASE 2024 Task 9 challenge \todo{how to cite DCASE workshop?}, which is a scaled-down version of the full AudioSep model. 
 
-\todo[inline]{CLAP model is using HTSAT and Roberta as base models, ONE-PEACE trained from scratch without pretrained initializations}
-
-\section{Results}
-
-\begin{figure}[t]
-  \includegraphics[width=\columnwidth]{plots/validation_plots.png}
-  \caption{Results on DCASE 2024 T9 Validation Set}
-  \label{fig:validation_results}
-\end{figure}
-
-% NOTE: COMMENT THIS OUT FOR FASTER PDF RENDER
-% Visual Spectrograms
-% \input{final_report/latex/visual_spectrograms}
-
-\begin{table*}[ht]
-\centering
-\label{tab:audio_text_retrieval}
-    \begin{tabular}{lcccccccccccc}
-        \toprule
-        \multirow{2}{*}{Method} & \multicolumn{6}{c}{AudioCaps} & \multicolumn{6}{c}{Clotho} \\
-        \cmidrule(lr){2-7} \cmidrule(lr){8-13}
-         & \multicolumn{3}{c}{Text $\to$ Audio} & \multicolumn{3}{c}{Audio $\to$ Text} & \multicolumn{3}{c}{Text $\to$ Audio} & \multicolumn{3}{c}{Audio $\to$ Text} \\
-        \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13}
-         & R@1 & R@5 & R@10 & R@1 & R@5 & R@10 & R@1 & R@5 & R@10 & R@1 & R@5 & R@10 \\
-        \midrule
-
-        % NOTE: taken from a table from the CLAP paper that isn't technically our checkpoint
-        \textbf{CLAP} & 36.7 & 70.9 & 83.2 & 45.3 & 78.0 & 87.7 & 12.0 & 31.6 & 43.9 & 15.7 & 36.9 & 51.3 \\
-
-        
-        \textbf{ONE-PEACE} & \textbf{42.5} & \textbf{77.5} & \textbf{88.4} & \textbf{51.0} & \textbf{81.9} & \textbf{92.0} & \textbf{22.4} & \textbf{49.0} & \textbf{62.7} & \textbf{27.1} & \textbf{52.3} & \textbf{65.4} \\
-        \bottomrule
-    \end{tabular}
-    
-    \caption{Comparison of audio-text retrieval performance, taken from the CLAP and ONE-PEACE papers}
-\end{table*}
-
-
-\begin{table*}
+\begin{table*}[!htbp]
   \centering
   \begin{tabular}{cccc}
                                & \multicolumn{3}{c}{\textbf{Number of Parameters}} \\
@@ -204,13 +205,78 @@ We used the baseline model from the DCASE 2024 Task 9 challenge \todo{how to cit
     \textbf{Model}             & \textbf{QueryNet}  & \textbf{SeparationNet} & \textbf{Total} \\
     \hline
     AudioSep-CLAP              &  199 M             &  29.6 M                & 229 M          \\
-    AudioSep-ONE-PEACE\_al     &  2.75 B            &  39.7 M                & 2.79 B         \\
-    AudioSep-ONE-PEACE\_full   &  4.00  B           &  39.7 M                & 4.04 B         \\
+    AudioSep-OP\_al     &  2.75 B            &  39.7 M                & 2.79 B         \\
+    AudioSep-OP\_full   &  4.00  B           &  39.7 M                & 4.04 B         \\
     \hline
   \end{tabular}
   \caption{Comparison of model sizes in our study}
 \end{table*}
 \todo[inline]{ONE-PEACE can be disassembled into different branches to handle different tasks, so the audio-language retrieval checkpoint is missing the image branch which makes it smaller}
+
+
+
+
+
+
+\todo[inline]{CLAP model is using HTSAT and Roberta as base models, ONE-PEACE trained from scratch without pretrained initializations}
+
+\section{Results}
+We evaluate our models on the DCASE 2024 T9 Validation set.
+
+
+\begin{table}[!htbp]
+  \centering
+
+  \begin{tabular}{lccc}
+    \hline
+    \textbf{Model}                         & \textbf{SDR}  & \textbf{SDRi} & \textbf{SISDR} \\
+    \hline
+    \scriptsize AudioSep-CLAP              & \textbf{5.71} & \textbf{5.67} & \textbf{3.86}   \\
+    \scriptsize AudioSep-OP\_al     & 5.08          & 5.05          & 3.28   \\
+    \scriptsize AudioSep-OP\_full   & 4.51          & 4.48          & 2.66   \\
+    \hline
+  \end{tabular}
+  \caption{Metrics on DCASE 2024 T9 Validation Set. AudioSep-CLAP refers to the baseline model and checkpoint provided in the DCASE 2024 T9 challenge. AudioSep-OP\_al and AudioSep-OP\_full metrics taken from our best checkpoints, at 140,000 steps.}
+  \label{tab:accents}
+\end{table}
+
+
+\begin{figure*}[!htbp]
+  \includegraphics[width=\textwidth]{plots/validation_plots.png}
+  \caption{Results on DCASE 2024 T9 Validation Set}
+  \label{fig:validation_results}
+\end{figure*}
+
+
+% NOTE: COMMENT THIS OUT FOR FASTER PDF RENDER
+% Visual Spectrograms
+% \input{final_report/latex/visual_spectrograms}
+
+
+% NOTE: extra retrieval metrics table metrics taken from papers
+% \begin{table*}[ht]
+% \centering
+% \label{tab:audio_text_retrieval}
+%     \begin{tabular}{lcccccccccccc}
+%         \toprule
+%         \multirow{2}{*}{Method} & \multicolumn{6}{c}{AudioCaps} & \multicolumn{6}{c}{Clotho} \\
+%         \cmidrule(lr){2-7} \cmidrule(lr){8-13}
+%          & \multicolumn{3}{c}{Text $\to$ Audio} & \multicolumn{3}{c}{Audio $\to$ Text} & \multicolumn{3}{c}{Text $\to$ Audio} & \multicolumn{3}{c}{Audio $\to$ Text} \\
+%         \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13}
+%          & R@1 & R@5 & R@10 & R@1 & R@5 & R@10 & R@1 & R@5 & R@10 & R@1 & R@5 & R@10 \\
+%         \midrule
+
+%         % NOTE: taken from a table from the CLAP paper that isn't technically our checkpoint
+%         \textbf{CLAP} & 36.7 & 70.9 & 83.2 & 45.3 & 78.0 & 87.7 & 12.0 & 31.6 & 43.9 & 15.7 & 36.9 & 51.3 \\
+
+        
+%         \textbf{ONE-PEACE} & \textbf{42.5} & \textbf{77.5} & \textbf{88.4} & \textbf{51.0} & \textbf{81.9} & \textbf{92.0} & \textbf{22.4} & \textbf{49.0} & \textbf{62.7} & \textbf{27.1} & \textbf{52.3} & \textbf{65.4} \\
+%         \bottomrule
+%     \end{tabular}
+    
+%     \caption{Comparison of audio-text retrieval performance, taken from the CLAP and ONE-PEACE papers}
+% \end{table*}
+
 
 \section{Engines}
 
