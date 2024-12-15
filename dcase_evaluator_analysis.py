@@ -142,12 +142,12 @@ class DCASEEvaluatorAnalysis:
 
                 if self.output_dir is not None:
                     # write out input mixture
-                    input_path = os.path.join(self.output_dir, f'{os.path.basename(source_path), os.path.basename(noise_path)}_input.wav')
+                    input_path = os.path.join(self.output_dir, f'{self.encoder_type}_{os.path.basename(source_path), os.path.basename(noise_path)}_input.wav')
                     wf.write(input_path, self.sampling_rate, mixture)
                     result['input_path'] = input_path
 
                     # write out separated segment
-                    output_path = os.path.join(self.output_dir, f'{os.path.basename(source_path), os.path.basename(noise_path)}_output.wav')
+                    output_path = os.path.join(self.output_dir, f'{self.encoder_type}_{os.path.basename(source_path), os.path.basename(noise_path)}_output.wav')
                     wf.write(output_path, self.sampling_rate, sep_segment)
                     result['output_path'] = output_path
 
