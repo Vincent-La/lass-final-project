@@ -138,24 +138,24 @@ One particular downstream audio-language task where CLAP has been used is Langua
 
 \section{Related Work}
 
-\subsection{Language-Queried Audio Source Separation}
-Language-Queried Audio Source Separation (LASS) achieves the task of separating arbitrary sound sources using natural language descriptions of the desired source. The language query is passed to the QueryNet, which encodes the query into an embedding space. Generally, within this embedding space, audio and language modalities are aligned. A Short-time Fourier transform is applied to the input mixture waveform, which converts the raw audio data into a spectrogram representing the evolution of the signal’s frequency content over time. Both of the resulting representations are then sent to SeparationNet, which uses the embedded language query to determine the frequencies of the audio data to preserve and cut. The embedded language query is incorporated into the SeparationNet via Feature-wise Linearly modulated (FiLm) layers. The FiLm layers are small fully-connected networks that learn modulation parameters that are applied per feature map, to contextualize the SeparationNet hidden representations with the language query. Finally, the output frequencies are put into an inverse STFT to convert them back to raw audio data. 
-
 % DONE! use \cite{clap2022}   <-- this is the microsoft paper that introduces CLAP
 % \todo[inline]{CITE: https://arxiv.org/pdf/2206.04769}
 \subsection{Contrastive Language-Audio Pretraining}
-Contrastive Language-Audio Pretraining (CLAP) \cite{clap2022} is an approach that learns to connect natural language and audio modalities. Using two encoders and contrastive learning, a multimodal joint space can be created with audio and text descriptions. The audio encoder is used to process audio data and the text encoder handles natural language text queries. These encoders are trained simultaneously using contrastive learning, which maximizes the similarity of aligned audio-text pairs in a shared embedding space while minimizing the similarity of unaligned pairs. CLAP utilizes a symmetric cross-entropy loss over a similarity matrix to optimize the audio and text encoders. The loss function ensures that the embeddings of aligned audio-text pairs are close in the embedding space, while unaligned pairs are further apart. In testing, the audio encoder generates embeddings for audio inputs and the text encoder produces embeddings for text queries to compare in the embedding space. CLAP has an embedding dimension size of 512.
+Contrastive Language-Audio Pretraining (CLAP) \cite{clap2022} is an approach that learns to connect natural language and audio modalities. Using two encoders and contrastive learning, a multimodal joint space can be created with audio and text descriptions. The audio encoder is used to process audio data and the text encoder handles natural language text queries. CLAP is based on RoBERTa for its text encoder. These encoders are trained simultaneously using contrastive learning, which maximizes the similarity of aligned audio-text pairs in a shared embedding space while minimizing the similarity of unaligned pairs. CLAP utilizes a symmetric cross-entropy loss over a similarity matrix to optimize the audio and text encoders. The loss function ensures that the embeddings of aligned audio-text pairs are close in the embedding space, while unaligned pairs are further apart. In testing, the audio encoder generates embeddings for audio inputs and the text encoder produces embeddings for text queries to compare in the embedding space. CLAP has an embedding dimension size of 512.
 
 \subsection{ONE-PEACE}
+ONE-PEACE \cite{onepeace} is a general representation model for aligning representations of vision, audio, and language information. The model utilizes a modality-specific audio encoder to extract features from audio signals. Unlike other models, ONE-PEACE is trained from scratch without relying on pre-trained initialization, demonstrating its ability to learn representations directly from multimodal data. The embedding dimension size of ONE-PEACE is 1536, three times larger than CLAP. The larger representation space allows ONE-PEACE to capture more expressive audio features, which can improve performance on tasks like language-queried audio source separation.
 
-The embedding dimension size of ONE-PEACE is 1536, three times larger than CLAP.
+\subsection{Language-Queried Audio Source Separation}
+Language-Queried Audio Source Separation (LASS) \cite{lass} achieves the task of separating arbitrary sound sources using natural language descriptions of the desired source. The language query is passed to the QueryNet, which encodes the query into an embedding space. Generally, within this embedding space, audio and language modalities are aligned. A Short-time Fourier transform is applied to the input mixture waveform, which converts the raw audio data into a spectrogram representing the evolution of the signal’s frequency content over time. Both of the resulting representations are then sent to SeparationNet, which uses the embedded language query to determine the frequencies of the audio data to preserve and cut. The embedded language query is incorporated into the SeparationNet via Feature-wise Linearly modulated (FiLm) layers. The FiLm layers are small fully-connected networks that learn modulation parameters that are applied per feature map, to contextualize the SeparationNet hidden representations with the language query. Finally, the output frequencies are put into an inverse STFT to convert them back to raw audio data. 
+
 
 \section{Methods}
 We compare AudioSep-OP with a baseline AudioSep model from the DCASE 2024 T9 challenge, \todo{how to cite DCASE workshop?} which we refer to as AudioSep-CLAP. We use the AudioSep-CLAP provided checkpoint for evaluation and train AudioSep-OP ourselves.
 
 % clap checkpoint is \verb|music_speech_audioset_epoch_15_esc_89.98.pt|
 \subsection{QueryNet}
-AudioSep-CLAP uses the text encoder of CLAP for the QueryNet whereas AudioSep-OP uses the text encoder of ONE-PEACE. The CLAP pretrained checkpoint we used was trained on music, speech, Audioset, and LAION-Audio-630k \todo{cite this dataset? or maybe the clap repo itself}. We evaluate two different ONE-PEACE pretrained checkpoints: the baseline pretrained checkpoint (AudioSep-OP\_full), and a checkpoint finetuned for audio-language retrieval on AudioCaps (AudioSep-OP\_al) \todo{cite audiocaps and clotho?} and Clotho. The QueryNet is frozen during training, per the AudioSep training specifications. \todo{full one-peace checkpoint is larger but it's not like we use the image or audio branches...}
+AudioSep-CLAP uses the text encoder of CLAP for the QueryNet whereas AudioSep-OP uses the text encoder of ONE-PEACE. The CLAP pretrained checkpoint is trained on music, speech, Audioset \cite{audioset}, and LAION-Audio-630k \cite{clap}. We evaluate two different ONE-PEACE pretrained checkpoints: the baseline pretrained checkpoint and a checkpoint fine-tuned for audio-language retrieval on AudioCaps \cite{audiocaps} and Clotho \cite{clotho}. The QueryNet is frozen during training, per the AudioSep training specifications. \todo{full one-peace checkpoint is larger but it's not like we use the image or audio branches...}
 
 \subsection{SeparationNet}
 All models in our study use a ResUNet for the SeparationNet. It consists of 7 encoder blocks and 6 decoder blocks. The FiLm layers are scaled accordingly to accommodate the embedding dimension size of CLAP or ONE-PEACE. 
@@ -165,14 +165,14 @@ We replicate as much of the DCASE 2024 T9 challenge training setup as we can for
 
 \begin{equation}
   \label{eq:scale}
-  s = \sqrt{\frac{E_1}{E_2} \cdot 10^{\text{SNR}/10}}
+  c = \sqrt{\frac{E_1}{E_2} \cdot 10^{\text{SNR}/10}}
 \end{equation}
 
-\noindent $s$ ensures that the input mixture $x$ has the specified SNR. $x$ is then computed as:
+\noindent $c$ ensures that the input mixture $x$ has the specified SNR. $x$ is then computed as:
 
 \begin{equation}
     \label{mixture}
-    x = a_1 + s a_2
+    x = a_1 + c a_2
 \end{equation}
 
 
@@ -220,26 +220,77 @@ The models are trained using Clothov2 \cite{clotho} and augmented FSD50K \cite{f
 
 \todo[inline]{CLAP model is using HTSAT and Roberta as base models, ONE-PEACE trained from scratch without pretrained initializations}
 
+\section{Evaluation Metrics}
+\todo[inline]{Let's be consistent and use $s$ for the target audio and $\hat{s}$ for the prediction/estimate}
+In audio source separation, evaluating the performance of the separation model is crucial to understanding their effectiveness. Three commonly used evaluation metrics for this purpose are Source-to-Distortion Ratio (SDR), Source-to-Distortion Improvement (SDRi), and Scale-Invariant Source-to-Distortion Ratio (SI-SDR). Additionally, cosine similarity is calculated to measure the alignment of vectors in embedding spaces, giving a complementary perspective on the relationship between separated and reference signals.
+
+SDR evaluates the quality of the separated audio source by comparing it with the reference source. The SDR value quantifies the relationship of the target source signal power to the power of distortion components, such as interference, artifacts, and noise. A high SDR signifies better separation quality, meaning that there are minimal distortions. SDR is defined as:
+\[
+% \text{SDR} = 10 \log_{10} \frac{\| s \|^2}{\| e_{\text{noise}} + e_{\text{interference}} + e_{\text{artifact}} \|^2}
+\text{SDR} = 10 \log_{10} \frac{\| s \|^2}{\| s - \hat{s} \|^2}
+\]
+\todo[inline]{some people seem to just have the denominator be the L2 norm of the difference between $s$ and $\hat{s}$ i think thatd be more clear?}
+% where:
+% \begin{itemize}
+%     \item $s$: The target source signal.
+%     \item \( e_{\text{noise}}, e_{\text{interference}}, e_{\text{artifact}} \): Errors due to noise, interference, and artifacts, respectively.
+% \end{itemize}
+
+SDRi measures the improvement in SDR computed from the separation algorithm compared to the baseline. SDRi signifies how much a separation algorithm improves over a given reference. A high SDRi indicates the effectiveness of separating the desired source audio from other signals. SDRi is defined as:
+\[
+\text{SDRi} = \text{SDR}_{\text{separated}} - \text{SDR}_{\text{baseline}}
+\]
+% where:
+% \begin{itemize}
+%     \item \( \text{SDR}_{\text{separated}} \): SDR of the separated signal.
+%     \item \( \text{SDR}_{\text{baseline}} \): SDR of the baseline signal.
+% \end{itemize}
+
+SI-SDR is a variation of SDR. It eliminates the dependency on the scale of the signals, focusing solely on the signal-to-distortion ratio after scaling by normalizing the target signal. This metric focuses on the structure of the signal and ignores the difference in amplitude. If there's a significant difference in amplitude, SDR potentially underestimates the separation performance.  When this value is high, it indicates that there’s better separation with accurate scaling of the source. SI-SDR is defined as:
+\[
+\text{SI-SDR} = 10 \log_{10} \frac{\| \alpha s \|^2}{\| \alpha s - \hat{s} \|^2}
+\]
+where:
+\begin{itemize}
+    % \item \( s \): The target source signal.
+    % \item \( \hat{s} \): The estimated source signal.
+    \item \( \alpha = \arg\min_{\alpha} \left| \alpha s - \hat{s} \right|^2\)
+    % : Scaling factor for optimal alignment.
+    \todo[inline]{the $<S_{target}, S_{estimate}>$ looks to be a dot product according to the paper the AudioSep people cite: https://ieeexplore.ieee.org/document/8683855 maybe a bit unclear?}
+\end{itemize}
+
+Additionally, cosine similarity computes the similarity between the language query and the input audio mixture in the ONE-PEACE embedding space. The same computation is performed between the language query and the output-separated audio. The purpose of this metric is to evaluate the audio-language alignment of the embedding space and quantify how much the ONE-PEACE model agrees with the separated audio result. Cosine similarity is defined as:
+\[
+\text{Cosine Similarity} = \cos(\theta) = \frac{\mathbf{A} \cdot \mathbf{B}}{\|\mathbf{A}\| \|\mathbf{B}\|}
+\]
+
 \section{Results}
 We evaluate our models on the DCASE 2024 T9 Validation set.
-
 
 \begin{table}[!htbp]
   \centering
 
   \begin{tabular}{lccc}
     \hline
-    \textbf{Model}                         & \textbf{SDR}  & \textbf{SDRi} & \textbf{SISDR} \\
+    \textbf{Model}       & \textbf{SDR}  & \textbf{SDRi} & \textbf{SISDR} \\
     \hline
-    \scriptsize AudioSep-CLAP              & \textbf{5.71} & \textbf{5.67} & \textbf{3.86}   \\
-    \scriptsize AudioSep-OP\_al     & 5.08          & 5.05          & 3.28   \\
-    \scriptsize AudioSep-OP\_full   & 4.51          & 4.48          & 2.66   \\
+     AudioSep-CLAP       & \textbf{5.71} & \textbf{5.67} & \textbf{3.86}   \\
+     AudioSep-OP\_al     & 5.08          & 5.05          & 3.28   \\
+     AudioSep-OP\_full   & 4.51          & 4.48          & 2.66   \\
     \hline
   \end{tabular}
   \caption{Metrics on DCASE 2024 T9 Validation Set. AudioSep-CLAP refers to the baseline model and checkpoint provided in the DCASE 2024 T9 challenge. AudioSep-OP\_al and AudioSep-OP\_full metrics taken from our best checkpoints, at 140,000 steps.}
   \label{tab:accents}
 \end{table}
 
+\todo[inline]{add more to intro paragraph and more analysis to the following paragraphs.}
+Table 1 and Table 2 present the size of the models and the evaluation metrics that were used to compare the performance of the three models: SDR, SDRi, and SI-SDR. The results indicate that utilizing larger models does not necessarily lead to better evaluation metric scores on the validation set.  
+
+The AudioSep-CLAP model, the baseline model provided by the DCASE 2024 T9 challenge, has the least amount of parameters and achieves the highest scores for all three evaluation metrics. AudioSep-CLAP has 199M QueryNet parameters and 29.6M SeparationNet parameters, for a total of 229M parameters. It records an SDR score of 5.71, an SDRi score of 5.67, and an SI-SDR score of 3.86. This demonstrates that the baseline model performed well in audio separation in comparison to the other two models, even with fewer parameters. 
+
+The AudioSep-OP\_al model performed well, but achieved lower scores than the baseline. Although this model has significantly more parameters for both QueryNet and SeparationNet than AudioSep-CLAP, it performed slightly worse. AudioSep-OP\_al has a total of 2.79B parameters, 2.75B for QueryNet and 39.7M for SeparationNet. This model had an SDR score of 5.08, an SDRi score of 5.05, and an SI-SDR score of 3.28. 
+
+Lastly, the AudioSep-OP\_full model achieved the lowest scores of the three models. Respectively, the SDR, SDRi, and SI-SDR scores were 4.51, 4.48, and 2.66. There are 4B parameters for QueryNet and 39.7M parameters for SeparationNet, for a total of 4.04B parameters. Although it has the highest number of parameters, the results are much worse. This indicates that the additional capacity of this model is being underutilized.
 
 \begin{figure*}[!htbp]
   \includegraphics[width=\textwidth]{plots/validation_plots.png}
