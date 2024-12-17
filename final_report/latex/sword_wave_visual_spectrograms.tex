@@ -1,0 +1,89 @@
+\begin{figure*}[!htbp]
+
+    % Row: input mixture and target
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/sword_swoosh/clap mixture_spectrogram.png}
+        \caption*{Mixture}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/sword_swoosh/clap target_spectrogram.png}
+        \caption*{Target}
+    \end{subfigure}
+     \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/sword_swoosh/clap noise_spectrogram.png}
+        \caption*{Noise}
+    \end{subfigure}
+
+    % Row: Original caption, ONE-PEACE sep, CLAP sep
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \scriptsize\textbf{"The sword swooshes through the air as someone waves it, making a whooshing sound"}
+        \vspace{10mm}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/sword_swoosh/onepeace sep_spectrogram.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/sword_swoosh/clap sep_spectrogram.png}
+    \end{subfigure}
+
+    % Row: Caption#0, ONE-PEACE sep, CLAP sep
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \scriptsize\textbf{"The sword slashes through the air"}
+        \vspace{13mm}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/sword_wave_0/onepeace sep_spectrogram.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/sword_wave_0/clap sep_spectrogram.png}
+    \end{subfigure}
+
+    % Row: Caption#2, ONE-PEACE sep, CLAP sep
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \scriptsize\textbf{"The sword slices through the air"}
+        \vspace{13mm}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/sword_wave_1/onepeace sep_spectrogram.png}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/sword_wave_1/clap sep_spectrogram.png}
+    \end{subfigure}
+
+    % Row: Caption#1, ONE-PEACE sep, CLAP sep
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \scriptsize\textbf{"The waving sword waves around wavily"}
+        \vspace{13mm}
+        \caption*{Caption}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/sword_wave_2/onepeace sep_spectrogram.png}
+        \caption*{ONE-PEACE}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/sword_wave_2/clap sep_spectrogram.png}
+        \caption*{CLAP}
+    \end{subfigure}
+    
+    % Continue rows similarly for other queries
+    % Add caption below
+    \caption{Visualized spectrograms for prompt engineering experiment. Small changes to the text prompt drastically effect the audio output when using ONE-PEACE.}
+    
+    \label{fig:separation_results}
+
+\end{figure*}

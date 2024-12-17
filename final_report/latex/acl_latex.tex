@@ -8,7 +8,7 @@
 % Change to "preprint" to generate a non-anonymous version with page numbers.
 
 % TODO: change this to "final" before submission
-\usepackage["preprint"]{acl}
+\usepackage["final"]{acl}
 
 % Standard package includes
 \usepackage{times}
@@ -43,122 +43,71 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{geometry}
-\usepackage{amsmath}
-
-% If the title and author information does not fit in the area allocated, uncomment the following
-%
-%\setlength\titlebox{<dim>}
-%
-% and set <dim> to something 5cm or larger.
+\usepackage{amsmath, amsfonts}
+\usepackage{makecell}
 
 \title{Separate ONE-PEACE You Describe}
 
-% Author information can be set in various styles:
-% For several authors from the same institution:
-% \author{Author 1 \and ... \and Author n \\
-%         Address line \\ ... \\ Address line}
 \author{Vincent La \quad Richard Wen \quad Sambit Sahoo \\
         University of Maryland, College Park}
 
-% if the names do not fit well on one line use
-%         Author 1 \\ {\bf Author 2} \\ ... \\ {\bf Author n} \\
-% For authors from different institutions:
-% \author{Author 1 \\ Address line \\  ... \\ Address line
-%         \And  ... \And
-%         Author n \\ Address line \\ ... \\ Address line}
-% To start a separate ``row'' of authors use \AND, as in
-% \author{Author 1 \\ Address line \\  ... \\ Address line
-%         \AND
-%         Author 2 \\ Address line \\ ... \\ Address line \And
-%         Author 3 \\ Address line \\ ... \\ Address line}
-
-% \author{First Author \\
-%   Affiliation / Address line 1 \\
-%   Affiliation / Address line 2 \\
-%   Affiliation / Address line 3 \\
-%   \texttt{email@domain} \\\And
-%   Second Author \\
-%   Affiliation / Address line 1 \\
-%   Affiliation / Address line 2 \\
-%   Affiliation / Address line 3 \\
-%   \texttt{email@domain} \\}
-
-%\author{
-%  \textbf{First Author\textsuperscript{1}},
-%  \textbf{Second Author\textsuperscript{1,2}},
-%  \textbf{Third T. Author\textsuperscript{1}},
-%  \textbf{Fourth Author\textsuperscript{1}},
-%\\
-%  \textbf{Fifth Author\textsuperscript{1,2}},
-%  \textbf{Sixth Author\textsuperscript{1}},
-%  \textbf{Seventh Author\textsuperscript{1}},
-%  \textbf{Eighth Author \textsuperscript{1,2,3,4}},
-%\\
-%  \textbf{Ninth Author\textsuperscript{1}},
-%  \textbf{Tenth Author\textsuperscript{1}},
-%  \textbf{Eleventh E. Author\textsuperscript{1,2,3,4,5}},
-%  \textbf{Twelfth Author\textsuperscript{1}},
-%\\
-%  \textbf{Thirteenth Author\textsuperscript{3}},
-%  \textbf{Fourteenth F. Author\textsuperscript{2,4}},
-%  \textbf{Fifteenth Author\textsuperscript{1}},
-%  \textbf{Sixteenth Author\textsuperscript{1}},
-%\\
-%  \textbf{Seventeenth S. Author\textsuperscript{4,5}},
-%  \textbf{Eighteenth Author\textsuperscript{3,4}},
-%  \textbf{Nineteenth N. Author\textsuperscript{2,5}},
-%  \textbf{Twentieth Author\textsuperscript{1}}
-%\\
-%\\
-%  \textsuperscript{1}Affiliation 1,
-%  \textsuperscript{2}Affiliation 2,
-%  \textsuperscript{3}Affiliation 3,
-%  \textsuperscript{4}Affiliation 4,
-%  \textsuperscript{5}Affiliation 5
-%\\
-%  \small{
-%    \textbf{Correspondence:} \href{mailto:email@domain}{email@domain}
-%  }
-%}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
 
-Language-queried audio source separation (LASS) is the task of isolating arbitrary sounds using a natural language description of the desired source. We modify AudioSep, a LASS architecture, by replacing the QueryNet with ONE-PEACE, which is a general representation model for aligning vision, audio, language, and potentially unlimited modalities. The original AudioSep architecture is used as a baseline comparison, where CLAP is used as the QueryNet. We find that ONE-PEACE only performs comparably on LASS, despite significantly outperforming CLAP on other downstream audio-language tasks like retrieval.
+Language-queried audio source separation (LASS) is the task of isolating arbitrary sounds using a natural language description of the desired source. We modify AudioSep, a LASS architecture, by replacing the QueryNet with ONE-PEACE, which is a general representation model for aligning vision, audio, language, and potentially unlimited modalities. The original AudioSep architecture is used as a baseline comparison, where CLAP is used as the QueryNet. We find that ONE-PEACE only performs comparably on LASS, despite significantly outperforming CLAP on other downstream audio-language tasks like retrieval. For reproducibility of this work, we release our source code, forked from the DCASE 2024 T9 challenge, at: \url{https://github.com/Vincent-La/lass-final-project/}
 
 \end{abstract}
 
 \section{Introduction}
 Performance on multi-modal downstream tasks has significantly improved in recent years as representation models that align different modalities have become more popular. These representation models seek to encode different types of input into a shared embedding space where similar concepts across different modalities are close to each other. In the audio-language domain, Contrastive Language-Audio Pretraining (CLAP) \cite{clap} has emerged as a prominent model for a variety of tasks.
 
-One particular downstream audio-language task where CLAP has been used is Language-queried audio source separation (LASS) \cite{lass}. LASS is the task of isolating arbitrary sounds using a natural language description of the desired source. Given some input audio with multiple sources of sound, the goal is to mask out audio sources that are unrelated to the language query. The alignment between audio and language modalities in the CLAP embedding space is 
-\todo[inline]{smth about how modality alignment in shared embedding space is important for LASS --> tie into ONE-PEACE --> compare retrieval performance to argue that ONE-PEACE generally has the better alignment}
+One particular downstream audio-language task where CLAP has been used is Language-queried audio source separation (LASS) \cite{lass}. LASS is the task of isolating arbitrary sounds using a natural language description of the desired source. Given some input audio with multiple sources of sound, the goal is to mask out audio sources irrelevant to the language query. Generally, a good alignment between language and audio modalities seems to be helpful for this task. We propose using a newer representation model, ONE-PEACE \cite{onepeace}, LASS. ONE-PEACE outperforms CLAP on audio-text retrieval benchmarks which implies a better audio-language alignment. We hypothesize that the improved alignment of ONE-PEACE will allow for more accurate identification and separation of sound sources related to the language query. 
 
 \section{Related Work}
 
 % DONE! use \cite{clap2022}   <-- this is the microsoft paper that introduces CLAP
 % \todo[inline]{CITE: https://arxiv.org/pdf/2206.04769}
 \subsection{Contrastive Language-Audio Pretraining}
-Contrastive Language-Audio Pretraining (CLAP) \cite{clap2022} is an approach that learns to connect natural language and audio modalities. Using two encoders and contrastive learning, a multimodal joint space can be created with audio and text descriptions. The audio encoder is used to process audio data and the text encoder handles natural language text queries. CLAP is based on RoBERTa for its text encoder. These encoders are trained simultaneously using contrastive learning, which maximizes the similarity of aligned audio-text pairs in a shared embedding space while minimizing the similarity of unaligned pairs. CLAP utilizes a symmetric cross-entropy loss over a similarity matrix to optimize the audio and text encoders. The loss function ensures that the embeddings of aligned audio-text pairs are close in the embedding space, while unaligned pairs are further apart. In testing, the audio encoder generates embeddings for audio inputs and the text encoder produces embeddings for text queries to compare in the embedding space. CLAP has an embedding dimension size of 512.
+Contrastive Language-Audio Pretraining (CLAP) \cite{clap2022} is an approach that learns to connect natural language and audio modalities. Using two encoders and contrastive learning, a multimodal joint space can be created with audio and text descriptions. The audio encoder is used to process audio data and the text encoder handles natural language text queries. These encoders are trained simultaneously using contrastive learning, which maximizes the similarity of aligned audio-text pairs in a shared embedding space while minimizing the similarity of unaligned pairs. CLAP utilizes a symmetric cross-entropy loss over a similarity matrix to optimize the audio and text encoders. The loss function ensures that the embeddings of aligned audio-text pairs are close in the embedding space, while unaligned pairs are further apart.
 
 \subsection{ONE-PEACE}
-ONE-PEACE \cite{onepeace} is a general representation model for aligning representations of vision, audio, and language information. The model utilizes a modality-specific audio encoder to extract features from audio signals. Unlike other models, ONE-PEACE is trained from scratch without relying on pre-trained initialization, demonstrating its ability to learn representations directly from multimodal data. The embedding dimension size of ONE-PEACE is 1536, three times larger than CLAP. The larger representation space allows ONE-PEACE to capture more expressive audio features, which can improve performance on tasks like language-queried audio source separation.
+ONE-PEACE \cite{onepeace} is a general representation model for aligning representations of vision, audio, and language information. The model utilizes a modality-specific audio encoder to extract features from audio signals. Unlike other models, ONE-PEACE is trained from scratch without relying on pre-trained initialization. The embedding dimension size of ONE-PEACE is 1536, three times larger than CLAP. The larger representation space allows ONE-PEACE to capture more expressive audio features, which may improve performance on tasks like language-queried audio source separation.
+
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{{final_report/AudioSep.png}}
+    \caption{AudioSep framework \cite{audiosep}.}
+    
+    \label{fig:audio_sep}
+\end{figure*}
 
 \subsection{Language-Queried Audio Source Separation}
-Language-Queried Audio Source Separation (LASS) \cite{lass} achieves the task of separating arbitrary sound sources using natural language descriptions of the desired source. The language query is passed to the QueryNet, which encodes the query into an embedding space. Generally, within this embedding space, audio and language modalities are aligned. A Short-time Fourier transform is applied to the input mixture waveform, which converts the raw audio data into a spectrogram representing the evolution of the signal’s frequency content over time. Both of the resulting representations are then sent to SeparationNet, which uses the embedded language query to determine the frequencies of the audio data to preserve and cut. The embedded language query is incorporated into the SeparationNet via Feature-wise Linearly modulated (FiLm) layers. The FiLm layers are small fully-connected networks that learn modulation parameters that are applied per feature map, to contextualize the SeparationNet hidden representations with the language query. Finally, the output frequencies are put into an inverse STFT to convert them back to raw audio data. 
+Language-Queried Audio Source Separation (LASS) \cite{lass} is the task of separating arbitrary sound sources using natural language descriptions of the desired source. The language query is passed to the QueryNet, which encodes the query into an embedding space. A Short-time Fourier transform is applied to the input mixture waveform, which converts the raw audio data into a spectrogram representing the evolution of the signal’s frequency content over time. Both of the resulting representations are then sent to SeparationNet, which uses the embedded language query to determine the frequencies of the audio data to preserve and cut. The embedded language query is incorporated into the SeparationNet via Feature-wise Linearly modulated (FiLm) layers \cite{film}. The FiLm layers are small fully-connected networks that learn modulation parameters that are applied per feature map, to contextualize the SeparationNet hidden representations with the language query. Formally, a FiLm layer is defined as:
+
+\begin{equation}
+    \label{film_equation}
+    \text{FiLM}(H_i^{(l)} \mid \gamma_i^{(l)}, \beta_i^{(l)}) = \gamma_i^{(l)} H_i^{(l)} + \beta_i^{(l)}
+\end{equation}
+
+\noindent where $H_i^{(l)} \in \mathbb{R}^{h \times w}$, and $\gamma_i^{(l)}$, $\beta_i^{(l)}$ are learned modulation parameters from a linear layer $g$ that takes the text embedding from the QueryNet as input. Finally, the output frequencies are put into an inverse STFT to convert them back to raw audio data. 
 
 
 \section{Methods}
-We compare AudioSep-OP with a baseline AudioSep model from the DCASE 2024 T9 challenge, \todo{how to cite DCASE workshop?} which we refer to as AudioSep-CLAP. We use the AudioSep-CLAP provided checkpoint for evaluation and train AudioSep-OP ourselves.
+We compare AudioSep-OP with a baseline AudioSep model from the DCASE 2024 T9 challenge, which we refer to as AudioSep-CLAP. We use the AudioSep-CLAP provided checkpoint for evaluation and train AudioSep-OP ourselves.
 
 % clap checkpoint is \verb|music_speech_audioset_epoch_15_esc_89.98.pt|
 \subsection{QueryNet}
-AudioSep-CLAP uses the text encoder of CLAP for the QueryNet whereas AudioSep-OP uses the text encoder of ONE-PEACE. The CLAP pretrained checkpoint is trained on music, speech, Audioset \cite{audioset}, and LAION-Audio-630k \cite{clap}. We evaluate two different ONE-PEACE pretrained checkpoints: the baseline pretrained checkpoint and a checkpoint fine-tuned for audio-language retrieval on AudioCaps \cite{audiocaps} and Clotho \cite{clotho}. The QueryNet is frozen during training, per the AudioSep training specifications. \todo{full one-peace checkpoint is larger but it's not like we use the image or audio branches...}
+AudioSep-CLAP uses the text encoder of CLAP for the QueryNet whereas AudioSep-OP uses the text encoder of ONE-PEACE. 
+
+The CLAP pretrained checkpoint is trained on music, speech, Audioset \cite{audioset}, and LAION-Audio-630k \cite{clap}. Our CLAP model relies on RoBERTa \cite{roberta} and HTS-AT \cite{htsat} for its pretrained text and audio encoders. CLAP has an embedding dimension size of 512.
+
+We evaluate two different ONE-PEACE pretrained checkpoints: the baseline pretrained checkpoint (AudioSep-OP\_full) and a checkpoint fine-tuned for audio-language retrieval (AudioSep-OP\_al) on AudioCaps \cite{audiocaps} and Clotho \cite{clotho}. The QueryNet is frozen during training, per the AudioSep training specifications.
 
 \subsection{SeparationNet}
-All models in our study use a ResUNet for the SeparationNet. It consists of 7 encoder blocks and 6 decoder blocks. The FiLm layers are scaled accordingly to accommodate the embedding dimension size of CLAP or ONE-PEACE. 
+All models in our study use a frequency-domain ResUNet \cite{resunet} for the SeparationNet. It consists of 7 encoder blocks and 6 decoder blocks. The FiLm layers are scaled accordingly to accommodate the embedding dimension size of CLAP or ONE-PEACE. 
 
 \subsection{Training Setup}
 We replicate as much of the DCASE 2024 T9 challenge training setup as we can for a fair comparison between models. During training, synthetic mixtures are created on the fly by mixing two randomly selected audios within a batch. We use the loudness augmentation method described in \cite{kong2023universal}. To create an input mixture $x$ from audio samples $a_1$ and $a_2$, we calculate the energy of $a_1$ and $a_2$, denoted as $E_1$ and $E_2$, by $E = \ \left\vert\vert s \vert\right\vert^2_2 $. A Signal-to-Noise Ratio (SNR) is chosen randomly from a range of [-10,10] decibels and used to compute a scaling factor $s$ using the formula:
@@ -186,15 +135,7 @@ The AudioSep models are trained end-to-end with an L1 waveform loss function den
 
 \noindent which is equivalent to the mean absolute error between the target waveform $s$ and the predicted waveform $\hat{s}$. All models are trained for 200k steps with a batch size of 16. We trained on a single Nvidia RTX A6000 GPU which took around 2 days.
 
-
-\subsection{Training Datasets}
-The models are trained using Clothov2 \cite{clotho} and augmented FSD50K \cite{fsd50k} datasets. Clotho is an audio captioning dataset, so when an audio from this dataset is selected as the source, a corresponding caption is used as the language query to the AudioSep model. FSD50k is an audio classification dataset with human-labeled audio events. The DCASE 2024 T9 creators generate automatic captions for each audio clip in FSD50K by prompting a GPT-4 \todo{do we have to cite chatgpt lmao} model with its sound event tags. 
-
-
-
-\subsection{AudioSep-OP}
-% (16k Hz, window size 1024, hop size 160)
-
+% model size table
 \begin{table*}[!htbp]
   \centering
   \begin{tabular}{cccc}
@@ -211,68 +152,77 @@ The models are trained using Clothov2 \cite{clotho} and augmented FSD50K \cite{f
   \end{tabular}
   \caption{Comparison of model sizes in our study}
 \end{table*}
-\todo[inline]{ONE-PEACE can be disassembled into different branches to handle different tasks, so the audio-language retrieval checkpoint is missing the image branch which makes it smaller}
+
+\subsection{Training Datasets}
+The models are trained using Clothov2 \cite{clotho} and augmented FSD50K \cite{fsd50k} datasets. Clotho is an audio captioning dataset, so when an audio from this dataset is selected as the source, a corresponding caption is used as the language query to the AudioSep model. FSD50k is an audio classification dataset with human-labeled audio events. The DCASE 2024 T9 creators generate automatic captions for each audio clip in FSD50K by prompting a GPT-4 model with its sound event tags. 
 
 
 
-
-
-
-\todo[inline]{CLAP model is using HTSAT and Roberta as base models, ONE-PEACE trained from scratch without pretrained initializations}
+% \todo[inline]{CLAP model is using HTSAT and Roberta as base models, ONE-PEACE trained from scratch without pretrained initializations}
 
 \section{Evaluation Metrics}
-\todo[inline]{Let's be consistent and use $s$ for the target audio and $\hat{s}$ for the prediction/estimate}
-In audio source separation, evaluating the performance of the separation model is crucial to understanding their effectiveness. Three commonly used evaluation metrics for this purpose are Source-to-Distortion Ratio (SDR), Source-to-Distortion Improvement (SDRi), and Scale-Invariant Source-to-Distortion Ratio (SI-SDR). Additionally, cosine similarity is calculated to measure the alignment of vectors in embedding spaces, giving a complementary perspective on the relationship between separated and reference signals.
+In audio source separation, three commonly used evaluation metrics are Source-to-Distortion Ratio (SDR), Source-to-Distortion Improvement (SDRi), and Scale-Invariant Source-to-Distortion Ratio (SI-SDR). Additionally, we calculate cosine similarity to measure the alignment of vectors in embedding spaces, giving a complementary perspective on the relationship between separated and reference signals.
 
-SDR evaluates the quality of the separated audio source by comparing it with the reference source. The SDR value quantifies the relationship of the target source signal power to the power of distortion components, such as interference, artifacts, and noise. A high SDR signifies better separation quality, meaning that there are minimal distortions. SDR is defined as:
-\[
+SDR \cite{sdr} evaluates the quality of the separated audio source by comparing it with the reference source. The SDR value quantifies the relationship of the target source signal power to the power of distortion components, such as interference, artifacts, and noise. A high SDR signifies better separation quality, meaning that there are minimal distortions. SDR is defined as:
+
+
+\begin{equation}
+    \label{sdr_equation}
+    \text{SDR} = 10 \log_{10} \frac{\| s \|^2}{\| s - \hat{s} \|^2}
 % \text{SDR} = 10 \log_{10} \frac{\| s \|^2}{\| e_{\text{noise}} + e_{\text{interference}} + e_{\text{artifact}} \|^2}
-\text{SDR} = 10 \log_{10} \frac{\| s \|^2}{\| s - \hat{s} \|^2}
-\]
-\todo[inline]{some people seem to just have the denominator be the L2 norm of the difference between $s$ and $\hat{s}$ i think thatd be more clear?}
+% \todo[inline]{some people seem to just have the denominator be the L2 norm of the difference between $s$ and $\hat{s}$ i think thatd be more clear?}
 % where:
 % \begin{itemize}
 %     \item $s$: The target source signal.
 %     \item \( e_{\text{noise}}, e_{\text{interference}}, e_{\text{artifact}} \): Errors due to noise, interference, and artifacts, respectively.
 % \end{itemize}
+\end{equation}
 
-SDRi measures the improvement in SDR computed from the separation algorithm compared to the baseline. SDRi signifies how much a separation algorithm improves over a given reference. A high SDRi indicates the effectiveness of separating the desired source audio from other signals. SDRi is defined as:
-\[
-\text{SDRi} = \text{SDR}_{\text{separated}} - \text{SDR}_{\text{baseline}}
-\]
+
+SDRi \cite{sdr} measures the improvement in SDR computed from the separation algorithm compared to the baseline. SDRi signifies how much a separation algorithm improves over a given reference. A high SDRi indicates the effectiveness of separating the desired source audio from other signals. SDRi is defined as:
+
+
+\begin{equation}
+    \label{sdri_equation}
+    \text{SDRi} = \text{SDR}_{\text{separated}} - \text{SDR}_{\text{baseline}}
+\end{equation}
 % where:
 % \begin{itemize}
 %     \item \( \text{SDR}_{\text{separated}} \): SDR of the separated signal.
 %     \item \( \text{SDR}_{\text{baseline}} \): SDR of the baseline signal.
 % \end{itemize}
 
-SI-SDR is a variation of SDR. It eliminates the dependency on the scale of the signals, focusing solely on the signal-to-distortion ratio after scaling by normalizing the target signal. This metric focuses on the structure of the signal and ignores the difference in amplitude. If there's a significant difference in amplitude, SDR potentially underestimates the separation performance.  When this value is high, it indicates that there’s better separation with accurate scaling of the source. SI-SDR is defined as:
-\[
-\text{SI-SDR} = 10 \log_{10} \frac{\| \alpha s \|^2}{\| \alpha s - \hat{s} \|^2}
-\]
+SI-SDR \cite{sdr} is a variation of SDR. It eliminates the dependency on the scale of the signals, focusing solely on the signal-to-distortion ratio after scaling by normalizing the target signal. This metric focuses on the structure of the signal and ignores the difference in amplitude. If there's a significant difference in amplitude, SDR potentially underestimates the separation performance.  When this value is high, it indicates that there’s better separation with accurate scaling of the source. SI-SDR is defined as:
+
+\begin{equation}
+    \label{sisdr_equation}
+    \text{SI-SDR} = 10 \log_{10} \frac{\| \alpha s \|^2}{\| \alpha s - \hat{s} \|^2}
+\end{equation}
 where:
-\begin{itemize}
     % \item \( s \): The target source signal.
     % \item \( \hat{s} \): The estimated source signal.
-    \item \( \alpha = \arg\min_{\alpha} \left| \alpha s - \hat{s} \right|^2\)
+    $$ \alpha = \frac{\hat{s}^T s}{\|s\|^2} $$
     % : Scaling factor for optimal alignment.
-    \todo[inline]{the $<S_{target}, S_{estimate}>$ looks to be a dot product according to the paper the AudioSep people cite: https://ieeexplore.ieee.org/document/8683855 maybe a bit unclear?}
-\end{itemize}
+    % \todo[inline]{the $<S_{target}, S_{estimate}>$ looks to be a dot product according to the paper the AudioSep people cite: https://ieeexplore.ieee.org/document/8683855 maybe a bit unclear?}
 
-Additionally, cosine similarity computes the similarity between the language query and the input audio mixture in the ONE-PEACE embedding space. The same computation is performed between the language query and the output-separated audio. The purpose of this metric is to evaluate the audio-language alignment of the embedding space and quantify how much the ONE-PEACE model agrees with the separated audio result. Cosine similarity is defined as:
-\[
-\text{Cosine Similarity} = \cos(\theta) = \frac{\mathbf{A} \cdot \mathbf{B}}{\|\mathbf{A}\| \|\mathbf{B}\|}
-\]
+\noindent SDR, SDRi, and SI-SDR are averaged per sample to give an overall performance on the dataset.
+
+Additionally, we compute cosine similarity between the language query and the input, output, and target audios in the CLAP and ONE-PEACE embedding spaces. The purpose of this metric is to evaluate the audio-language alignment of the embedding space and quantify how much the models actually leverage it. Cosine similarity is defined as:
+
+\begin{equation}
+    \label{cosine_sim_equation}
+    \text{Cosine Similarity} = \cos(\theta) = \frac{\mathbf{A} \cdot \mathbf{B}}{\|\mathbf{A}\| \|\mathbf{B}\|}
+\end{equation}
 
 \section{Results}
-We evaluate our models on the DCASE 2024 T9 Validation set.
+We evaluate our models on the DCASE 2024 T9 Validation set. To create the validation set, 1000 audioclips from Freesound \cite{freesound} were manually annotated. 3000 synthetic audio mixtures were then created in the same procedure described in our training setup with a SNR ranging from [-15,15] decibels.
 
 \begin{table}[!htbp]
   \centering
 
   \begin{tabular}{lccc}
     \hline
-    \textbf{Model}       & \textbf{SDR}  & \textbf{SDRi} & \textbf{SISDR} \\
+    \textbf{Model}       & \textbf{SDR}  & \textbf{SDRi} & \textbf{SI-SDR} \\
     \hline
      AudioSep-CLAP       & \textbf{5.71} & \textbf{5.67} & \textbf{3.86}   \\
      AudioSep-OP\_al     & 5.08          & 5.05          & 3.28   \\
@@ -283,14 +233,28 @@ We evaluate our models on the DCASE 2024 T9 Validation set.
   \label{tab:accents}
 \end{table}
 
-\todo[inline]{add more to intro paragraph and more analysis to the following paragraphs.}
-Table 1 and Table 2 present the size of the models and the evaluation metrics that were used to compare the performance of the three models: SDR, SDRi, and SI-SDR. The results indicate that utilizing larger models does not necessarily lead to better evaluation metric scores on the validation set.  
+Table 1 and Table 2 present the model sizes and the evaluation metrics used to compare the performance of the three models: SDR, SDRi, and SI-SDR. The results indicate that utilizing larger models does not necessarily lead to better evaluation metric scores on the validation set.  
 
-The AudioSep-CLAP model, the baseline model provided by the DCASE 2024 T9 challenge, has the least amount of parameters and achieves the highest scores for all three evaluation metrics. AudioSep-CLAP has 199M QueryNet parameters and 29.6M SeparationNet parameters, for a total of 229M parameters. It records an SDR score of 5.71, an SDRi score of 5.67, and an SI-SDR score of 3.86. This demonstrates that the baseline model performed well in audio separation in comparison to the other two models, even with fewer parameters. 
+% \todo[inline]{Shorten the next 3 paragraphs. Baseline marginally better overall despite being smaller in model size. AL checkpoint than the full pretrained one-peace}
+The AudioSep-CLAP model, the baseline model provided by the DCASE 2024 T9 challenge, has the least amount of parameters and achieves the highest scores for all three evaluation metrics. This model records the best scores for SDR, SDRi, and SI-SDR, demonstrating that the baseline model performed better in audio separation in comparison to the other two models, even with fewer parameters. The AudioSep-OP\_al model performed well, but achieved lower scores than the baseline. Although this model has significantly more parameters for both QueryNet and SeparationNet than AudioSep-CLAP, it performed slightly worse based on the metrics listed in Table 2. Lastly, the AudioSep-OP\_full model achieved the lowest scores of the three models. It's important to note that both ONE-PEACE models only utilize the text branch for inference (\~1.5 B params), excluding the audio/image branches.
 
-The AudioSep-OP\_al model performed well, but achieved lower scores than the baseline. Although this model has significantly more parameters for both QueryNet and SeparationNet than AudioSep-CLAP, it performed slightly worse. AudioSep-OP\_al has a total of 2.79B parameters, 2.75B for QueryNet and 39.7M for SeparationNet. This model had an SDR score of 5.08, an SDRi score of 5.05, and an SI-SDR score of 3.28. 
+\begin{table}[!htbp]
+  \centering
 
-Lastly, the AudioSep-OP\_full model achieved the lowest scores of the three models. Respectively, the SDR, SDRi, and SI-SDR scores were 4.51, 4.48, and 2.66. There are 4B parameters for QueryNet and 39.7M parameters for SeparationNet, for a total of 4.04B parameters. Although it has the highest number of parameters, the results are much worse. This indicates that the additional capacity of this model is being underutilized.
+  \begin{tabular}{lccc}
+    \hline
+    \textbf{Model}       & \textbf{SDR}  & \textbf{SDRi} & \textbf{SI-SDR} \\
+    \hline
+     AudioSep-CLAP       & \textbf{10.72} & \textbf{10.72} & 9.28   \\
+     AudioSep-OP\_al     & 10.59         & 10.59         & \textbf{9.48}   \\
+    \hline
+  \end{tabular}
+  \caption{Metrics on training subset. We create 50,000 synthetic mixtures by sampling randomly from the Clothov2 and FSD50k data sets and evaluate AudioSep-CLAP and AudioSep-OP to quantify their fitness to our training data.}
+  \label{tab:accents}
+\end{table}
+
+AudioSep-CLAP and AudioSep-OP\_al were evaluated on a training subset, consisting of 50,000 randomly sampled synthetic mixtures from the ClothoV2 and FSD50k data sets. The objective was to assess how well the models fit the training data. Table 3 demonstrates that both models achieve comparbly high SDR, SDRi, and SI-SDR scores. We observed a moderate drop in scores for the validation set, as expected for evaluating on unseen data. The validation performance remains reasonably high, suggesting that both models are generalizing well and one is not particularly overfitting to the training data compared to the other.
+
 
 \begin{figure*}[!htbp]
   \includegraphics[width=\textwidth]{plots/validation_plots.png}
@@ -298,271 +262,99 @@ Lastly, the AudioSep-OP\_full model achieved the lowest scores of the three mode
   \label{fig:validation_results}
 \end{figure*}
 
+Figure 1 presents our model performance on the DCASE 2024 T9 Validation set. It plots the values of the evaluation metrics over training steps, measured at intervals of 20,000 steps. Overall, the baseline model has the best SDR, SDRi, and SI-SDR scores. 
+
+In the left plot, the SDR value increases as training progresses, peaking at 140,000 steps for the ONE-PEACE models. AudioSep-OP\_al has a score of 5.08 and AudioSep-OP\_full has a score of 4.51. After 140,000 steps, the SDR score fluctuates, but stabilizes. Similarly for SDRi, the scores for the ONE-PEACE models increase as training progresses until 140,000 steps, then stabilizes. The AudioSep-OP\_al has a score of 5.05 and the AudioSep-OP\_full has a score of 4.47. The AudioSep-OP\_al model slightly outperforms the AudioSep-OP\_full model in terms of SDR and SDRi scores. Lastly, there is a significant increase in SI-SDR for both ONE-PEACE models from 0 steps to 20,000. After, there is a consistently small increase in score until 140,000 steps.
+
 
 % NOTE: COMMENT THIS OUT FOR FASTER PDF RENDER
 % Visual Spectrograms
-% \input{final_report/latex/visual_spectrograms}
+\input{final_report/latex/validation_visual_spectrograms}
+\label{fig:val_visuals}
+
+\input{final_report/latex/sword_wave_visual_spectrograms}
+\label{fig:sword_spectrograms}
+
+\input{final_report/latex/sdr_vs_sim}
 
 
-% NOTE: extra retrieval metrics table metrics taken from papers
-% \begin{table*}[ht]
-% \centering
-% \label{tab:audio_text_retrieval}
-%     \begin{tabular}{lcccccccccccc}
-%         \toprule
-%         \multirow{2}{*}{Method} & \multicolumn{6}{c}{AudioCaps} & \multicolumn{6}{c}{Clotho} \\
-%         \cmidrule(lr){2-7} \cmidrule(lr){8-13}
-%          & \multicolumn{3}{c}{Text $\to$ Audio} & \multicolumn{3}{c}{Audio $\to$ Text} & \multicolumn{3}{c}{Text $\to$ Audio} & \multicolumn{3}{c}{Audio $\to$ Text} \\
-%         \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13}
-%          & R@1 & R@5 & R@10 & R@1 & R@5 & R@10 & R@1 & R@5 & R@10 & R@1 & R@5 & R@10 \\
-%         \midrule
+\section{Analysis}
 
-%         % NOTE: taken from a table from the CLAP paper that isn't technically our checkpoint
-%         \textbf{CLAP} & 36.7 & 70.9 & 83.2 & 45.3 & 78.0 & 87.7 & 12.0 & 31.6 & 43.9 & 15.7 & 36.9 & 51.3 \\
+\subsection{Vector Similarity}
 
-        
-%         \textbf{ONE-PEACE} & \textbf{42.5} & \textbf{77.5} & \textbf{88.4} & \textbf{51.0} & \textbf{81.9} & \textbf{92.0} & \textbf{22.4} & \textbf{49.0} & \textbf{62.7} & \textbf{27.1} & \textbf{52.3} & \textbf{65.4} \\
-%         \bottomrule
-%     \end{tabular}
+In service of understanding the impact of the different embeddings on the AudioSep model's ability to understand the input text prompt, we measured the cosine similarity between audio files and the text prompt in the embedding space. Figure~\ref{fig:sdr_vs_sim} shows a comparison between SDRi and the change in similarity in both CLAP and ONE-PEACE. Each point is a unique input, with its horizontal position indicating the change in cosine similarity between the input and output audio files, and its vertical position indicating the change in SDR between the input and output audio files.
+
+The plots indicate little to no correlation between the change in similarity and the improvement in SDR. This suggests that the model does not work by merely trying to generate audio that is closer to the text prompt in the embedding space. It appears that instead of specific differences in the alignment of the their encoders, the performance disparity between the two models is better explained by structural details such as the type/amount of information encoded by the text encoders or patterns in the descriptiveness of the human-produced captions which may lead to overfitting.
+
+\subsection{Prompt Engineering}
+
+When looking for outlier test cases, we found several where ONE-PEACE performed significantly worse than CLAP. We noticed that the several with the highest discrepancy shared a commonality, the presence of the word ``whoosh'' in the prompt. In all cases, ONE-PEACE preserved significant parts of the noise audio, which were soft whitenoise compared to the relatively sharp source audio. This suggests that the ONE-PEACE encoding may interpret ``whoosh'' sounds as gradual and drawn-out, leading to it prioritizing much more of the noise.
+
+Figure~\ref{fig:sword_spectrograms} shows one such test case that was especially egregious. SDR and similarity metrics are reported in Table~\ref{tab:sword_clap} and Table~\ref{tab:sword_onepeace}. The prompt in this case was ``The sword swooshes through the air as someone waves it, making a whooshing sound.'' The source audio sounds like multiple quick slashing sounds. The noise audio is annotated ``The engine is accelerating and birds are singing'' but sounds similar to ambient noise of crashing waves. ONE-PEACE seemingly thinks the caption better describes the noise audio than the source audio, because it flattens the sword slashes while keeping the waves. This may be partially due to its interpretation of a whoosh sound. Moreover, this example is amusing because the prompt coincidentally includes the word ``waves'', potentially further confusing the text encoder.
+
+To examine the effect of the prompt on the text encoders, we modified the text prompt slightly to emphasize different aspects of the audio mixture. By changing the sound descriptor from a ``whoosh'' to a ``slice'' or ``slash'', we were able to guide ONE-PEACE to obtain virtually the same SDR achievable by CLAP. On the other hand, by artificially inserting variations of the word ``wave'', we were able to trick ONE-PEACE into keeping only the noise and masking away all of the source audio. On the other hand, CLAP is mostly unaffected by these changes in word choice. This suggests differences between the sensitivity of ONE-PEACE and CLAP to various parts of the text prompt. Whereas ONE-PEACE takes into account the entirety of the prompt (allowing us to mislead it by filling the sentence with distracting words), CLAP may fixate on the main subject of the prompt, ``sword'', which is the invariant in these different prompts. This could be due to the higher dimensionality of the ONE-PEACE encoding or differences in the attention layers of the two encoders. Regardless, this implies that one way to improve the performance of ONE-PEACE is by increasing the specificity of the text prompts.
+
+
+
+% Prompt engineering metrics table CLAP
+\begin{table*}[!htbp]
+  \centering
+
+  \small
+  \begin{tabular}{ccccccc}
+    \textbf{Caption}    & \textbf{SDR}  & \textbf{SDRi} & \textbf{SI-SDR}  & \textbf{I-Similarity}  & \textbf{O-Similarity} & \textbf{T-Similarity} \\
+    \hline
     
-%     \caption{Comparison of audio-text retrieval performance, taken from the CLAP and ONE-PEACE papers}
-% \end{table*}
+    \makecell{``The sword swooshes through the air \\ as someone waves it, making \\ a whooshing sound''\\}  & 28.56 & 13.56 & 28.56 & 0.3910 & 0.56039 & 0.3782 \\
+    \hline
+    \makecell{``The sword slashes through the air''}    & 27.94 & 12.94 & 28.02 & 0.3072 & 0.3132 & 0.3050 \\
+    \hline
+    \makecell{``The sword slices through the air''}     & 28.39  & 13.39 & 28.42 & 0.2943 & 0.2907 & 0.2556 \\
+    \hline
+    \makecell{``The waving sword waves around wavily''} & 6.68   & -8.32 & 5.63  & 0.2380 & 0.2189 & 0.1124  \\
+    
+    \hline
+  \end{tabular}
+  \caption{CLAP performance metrics on prompt engineering experiment, The similarity metrics refer to cosine similarity between the embedding for the caption and the input mixture (I), output separation result (O), and the target (source) audio (T).}
+  
+\end{table*}\label{tab:sword_clap}
 
-
-\section{Engines}
-
-To produce a PDF file, pdf\LaTeX{} is strongly recommended (over original \LaTeX{} plus dvips+ps2pdf or dvipdf). Xe\LaTeX{} also produces PDF files, and is especially suitable for text in non-Latin scripts.
-
-% \section{Preamble}
-
-% The first line of the file must be
-% \begin{quote}
-% \begin{verbatim}
-% \documentclass[11pt]{article}
-% \end{verbatim}
-% \end{quote}
-
-% To load the style file in the review version:
-% \begin{quote}
-% \begin{verbatim}
-% \usepackage[review]{acl}
-% \end{verbatim}
-% \end{quote}
-% For the final version, omit the \verb|review| option:
-% \begin{quote}
-% \begin{verbatim}
-% \usepackage{acl}
-% \end{verbatim}
-% \end{quote}
-
-% To use Times Roman, put the following in the preamble:
-% \begin{quote}
-% \begin{verbatim}
-% \usepackage{times}
-% \end{verbatim}
-% \end{quote}
-% (Alternatives like txfonts or newtx are also acceptable.)
-
-% Please see the \LaTeX{} source of this document for comments on other packages that may be useful.
-
-% Set the title and author using \verb|\title| and \verb|\author|. Within the author list, format multiple authors using \verb|\and| and \verb|\And| and \verb|\AND|; please see the \LaTeX{} source for examples.
-
-% By default, the box containing the title and author names is set to the minimum of 5 cm. If you need more space, include the following in the preamble:
-% \begin{quote}
-% \begin{verbatim}
-% \setlength\titlebox{<dim>}
-% \end{verbatim}
-% \end{quote}
-% where \verb|<dim>| is replaced with a length. Do not set this length smaller than 5 cm.
-
-\section{Document Body}
-
-\subsection{Footnotes}
-
-Footnotes are inserted with the \verb|\footnote| command.\footnote{This is a footnote.}
-
-\subsection{Tables and figures}
-
-See Table~\ref{tab:accents} for an example of a table and its caption.
-\textbf{Do not override the default caption sizes.}
-
-\begin{table}
+% Prompt engineering metrics table ONE-PEACE
+\begin{table*}[!htbp]
   \centering
-  \begin{tabular}{lc}
+  \small
+  \begin{tabular}{ccccccc}
+    \textbf{Caption}    & \textbf{SDR}  & \textbf{SDRi} & \textbf{SI-SDR}  & \textbf{I-Similarity}  & \textbf{O-Similarity} & \textbf{T-Similarity} \\
     \hline
-    \textbf{Command} & \textbf{Output} \\
+    
+    \makecell{``The sword swooshes through the air \\ as someone waves it, making \\ a whooshing sound''}  & 2.02 & -12.98 & -1.72 & 0.1639 & 0.3155 & 0.3884 \\
     \hline
-    \verb|{\"a}|     & {\"a}           \\
-    \verb|{\^e}|     & {\^e}           \\
-    \verb|{\`i}|     & {\`i}           \\
-    \verb|{\.I}|     & {\.I}           \\
-    \verb|{\o}|      & {\o}            \\
-    \verb|{\'u}|     & {\'u}           \\
-    \verb|{\aa}|     & {\aa}           \\\hline
-  \end{tabular}
-  \begin{tabular}{lc}
+    \makecell{``The sword slashes through the air''}    & 3.22 & -11.78 & 0.86 & 0.1617 & 0.4141 & 0.3823      \\
     \hline
-    \textbf{Command} & \textbf{Output} \\
+    \makecell{``The sword slices through the air''}     & 27.10  & 12.10 & 27.27 & 0.2426 & 0.4351 & 0.4560     \\
     \hline
-    \verb|{\c c}|    & {\c c}          \\
-    \verb|{\u g}|    & {\u g}          \\
-    \verb|{\l}|      & {\l}            \\
-    \verb|{\~n}|     & {\~n}           \\
-    \verb|{\H o}|    & {\H o}          \\
-    \verb|{\v r}|    & {\v r}          \\
-    \verb|{\ss}|     & {\ss}           \\
+    \makecell{``The waving sword waves around wavily''} & -0.08   & -15.08 &  -39.01 & 0.1584 & 0.1368 & 0.2434  \\
+    
     \hline
   \end{tabular}
-  \caption{Example commands for accented characters, to be used in, \emph{e.g.}, Bib\TeX{} entries.}
-  \label{tab:accents}
-\end{table}
+  
+  \caption{ONE-PEACE performance metrics on prompt engineering experiment. The similarity metrics refer to cosine similarity between the embedding for the caption and the input mixture (I), output separation result (O), and the target (source) audio (T).}
+  
+\end{table*}\label{tab:sword_onepeace}
 
-As much as possible, fonts in figures should conform
-to the document fonts. See Figure~\ref{fig:experiments} for an example of a figure and its caption.
 
-Using the \verb|graphicx| package graphics files can be included within figure
-environment at an appropriate point within the text.
-The \verb|graphicx| package supports various optional arguments to control the
-appearance of the figure.
-You must include it explicitly in the \LaTeX{} preamble (after the
-\verb|\documentclass| declaration and before \verb|\begin{document}|) using
-\verb|\usepackage{graphicx}|.
+\paragraph{Contributions}\quad\\
+\textbf{Vincent:} training/evaluation of AudioSep models, visualized spectrogram figures, methods+training section and overall paper writing. \\
+\textbf{Sambit:} Wrote Section 2, Section 4, Section 5, and part of Introduction. Helped with evaluation metrics and similarities for the validation set. \\
+\textbf{Richard:} Analysis and plotting of SDR and cosine similarity, collaboration on prompt engineering, wrote Section 6.
 
-\begin{figure}[t]
-  \includegraphics[width=\columnwidth]{example-image-golden}
-  \caption{A figure with a caption that runs for more than one line.
-    Example image is usually available through the \texttt{mwe} package
-    without even mentioning it in the preamble.}
-  \label{fig:experiments}
-\end{figure}
-
-\begin{figure*}[t]
-  \includegraphics[width=0.48\linewidth]{example-image-a} \hfill
-  \includegraphics[width=0.48\linewidth]{example-image-b}
-  \caption {A minimal working example to demonstrate how to place
-    two images side-by-side.}
-\end{figure*}
-
-\subsection{Hyperlinks}
-
-Users of older versions of \LaTeX{} may encounter the following error during compilation:
-\begin{quote}
-\verb|\pdfendlink| ended up in different nesting level than \verb|\pdfstartlink|.
-\end{quote}
-This happens when pdf\LaTeX{} is used and a citation splits across a page boundary. The best way to fix this is to upgrade \LaTeX{} to 2018-12-01 or later.
-
-\subsection{Citations}
-
-\begin{table*}
-  \centering
-  \begin{tabular}{lll}
-    \hline
-    \textbf{Output}           & \textbf{natbib command} & \textbf{ACL only command} \\
-    \hline
-    \citep{Gusfield:97}       & \verb|\citep|           &                           \\
-    \citealp{Gusfield:97}     & \verb|\citealp|         &                           \\
-    \citet{Gusfield:97}       & \verb|\citet|           &                           \\
-    \citeyearpar{Gusfield:97} & \verb|\citeyearpar|     &                           \\
-    \citeposs{Gusfield:97}    &                         & \verb|\citeposs|          \\
-    \hline
-  \end{tabular}
-  \caption{\label{citation-guide}
-    Citation commands supported by the style file.
-    The style is based on the natbib package and supports all natbib citation commands.
-    It also supports commands defined in previous ACL style files for compatibility.
-  }
-\end{table*}
-
-Table~\ref{citation-guide} shows the syntax supported by the style files.
-We encourage you to use the natbib styles.
-You can use the command \verb|\citet| (cite in text) to get ``author (year)'' citations, like this citation to a paper by \citet{Gusfield:97}.
-You can use the command \verb|\citep| (cite in parentheses) to get ``(author, year)'' citations \citep{Gusfield:97}.
-You can use the command \verb|\citealp| (alternative cite without parentheses) to get ``author, year'' citations, which is useful for using citations within parentheses (e.g. \citealp{Gusfield:97}).
-
-A possessive citation can be made with the command \verb|\citeposs|.
-This is not a standard natbib command, so it is generally not compatible
-with other style files.
-
-\subsection{References}
-
-\nocite{Ando2005,andrew2007scalable,rasooli-tetrault-2015}
-
-The \LaTeX{} and Bib\TeX{} style files provided roughly follow the American Psychological Association format.
-If your own bib file is named \texttt{custom.bib}, then placing the following before any appendices in your \LaTeX{} file will generate the references section for you:
-\begin{quote}
-\begin{verbatim}
-\bibliography{custom}
-\end{verbatim}
-\end{quote}
-
-You can obtain the complete ACL Anthology as a Bib\TeX{} file from \url{https://aclweb.org/anthology/anthology.bib.gz}.
-To include both the Anthology and your own .bib file, use the following instead of the above.
-\begin{quote}
-\begin{verbatim}
-\bibliography{anthology,custom}
-\end{verbatim}
-\end{quote}
-
-Please see Section~\ref{sec:bibtex} for information on preparing Bib\TeX{} files.
-
-\subsection{Equations}
-
-An example equation is shown below:
-\begin{equation}
-  \label{eq:example}
-  A = \pi r^2
-\end{equation}
-
-Labels for equation numbers, sections, subsections, figures and tables
-are all defined with the \verb|\label{label}| command and cross references
-to them are made with the \verb|\ref{label}| command.
-
-This an example cross-reference to Equation~\ref{eq:example}.
-
-\subsection{Appendices}
-
-Use \verb|\appendix| before any appendix section to switch the section numbering over to letters. See Appendix~\ref{sec:appendix} for an example.
-
-\section{Bib\TeX{} Files}
-\label{sec:bibtex}
-
-Unicode cannot be used in Bib\TeX{} entries, and some ways of typing special characters can disrupt Bib\TeX's alphabetization. The recommended way of typing special characters is shown in Table~\ref{tab:accents}.
-
-Please ensure that Bib\TeX{} records contain DOIs or URLs when possible, and for all the ACL materials that you reference.
-Use the \verb|doi| field for DOIs and the \verb|url| field for URLs.
-If a Bib\TeX{} entry has a URL or DOI field, the paper title in the references section will appear as a hyperlink to the paper, using the hyperref \LaTeX{} package.
-
-\section*{Acknowledgments}
-
-This document has been adapted
-by Steven Bethard, Ryan Cotterell and Rui Yan
-from the instructions for earlier ACL and NAACL proceedings, including those for
-ACL 2019 by Douwe Kiela and Ivan Vuli\'{c},
-NAACL 2019 by Stephanie Lukin and Alla Roskovskaya,
-ACL 2018 by Shay Cohen, Kevin Gimpel, and Wei Lu,
-NAACL 2018 by Margaret Mitchell and Stephanie Lukin,
-Bib\TeX{} suggestions for (NA)ACL 2017/2018 from Jason Eisner,
-ACL 2017 by Dan Gildea and Min-Yen Kan,
-NAACL 2017 by Margaret Mitchell,
-ACL 2012 by Maggie Li and Michael White,
-ACL 2010 by Jing-Shin Chang and Philipp Koehn,
-ACL 2008 by Johanna D. Moore, Simone Teufel, James Allan, and Sadaoki Furui,
-ACL 2005 by Hwee Tou Ng and Kemal Oflazer,
-ACL 2002 by Eugene Charniak and Dekang Lin,
-and earlier ACL and EACL formats written by several people, including
-John Chen, Henry S. Thompson and Donald Walker.
-Additional elements were taken from the formatting instructions of the \emph{International Joint Conference on Artificial Intelligence} and the \emph{Conference on Computer Vision and Pattern Recognition}.
-N
-% Bibliography entries for the entire Anthology, followed by custom entries
-%\bibliography{anthology,custom}
-% Custom bibliography entries only
 \bibliography{custom}
 
-\appendix
+% \appendix
 
-\section{Example Appendix}
-\label{sec:appendix}
+% \section{Example Appendix}
+% \label{sec:appendix}
 
-This is an appendix.
+% This is an appendix.
 
 \end{document}
